@@ -20,7 +20,7 @@ def updateOfficialsFouls(officials):
             officialtohomefouls[official].append (homefouls)
         else:
             officialtohomefouls[official] = [homefouls]
-
+        
         if official in officialtoawayfouls:
             officialtoawayfouls[official].append (awayfouls)
         else:
@@ -34,7 +34,7 @@ def getAwayFoulAverage():
 
 
 for i in range (1, 668):
-
+    
     path = "data/game{:03d}.json".format(i)
     print path
     json_file = open(path, "r")
@@ -44,8 +44,8 @@ for i in range (1, 668):
         json_dict = json.loads(json_text)
     except:
         print ('FAILED GAME ' + str(i))
-
-
+    
+    
     officials = []
     for i in range (0, 3):
         officials.append(int(json_dict[u'g'][u'offs'][u'off'][i][u'num']))
@@ -53,9 +53,9 @@ for i in range (1, 668):
     homefouls = int(json_dict[u'g'][u'hls'][u'tstsg'][u'pf'])
     homesum += homefouls
 
-    awayfouls = int(json_dict[u'g'][u'vls'][u'tstsg'][u'pf'])
-    awaysum += awayfouls
-
+awayfouls = int(json_dict[u'g'][u'vls'][u'tstsg'][u'pf'])
+awaysum += awayfouls
+    
     # for the matrix
     row = [0] * 78
     for i in range (0, 3):
@@ -64,8 +64,8 @@ for i in range (1, 668):
     vectorB.append([homefouls])
     vectorC.append([awayfouls])
 
-    #update the dicts with the referees' fouls for the game
-    updateOfficialsFouls(officials)
+#update the dicts with the referees' fouls for the game
+updateOfficialsFouls(officials)
 
 # Find average of fouls for home and array
 averagehome = getHomeFoulAverage()
@@ -124,4 +124,5 @@ csvwriter.writerow([i for i in range(78)] + ["Home Team Fouls", "Away Team Fouls
 for i in range (len (matrixA)):
     csvwriter.writerow (matrixA[i]+ [vectorB[i][0], vectorC[i][0]])
 #f.write ("," + str ()
+
 
