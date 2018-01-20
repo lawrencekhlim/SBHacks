@@ -48,13 +48,24 @@ averageaway = (float) (awaysum)/666
 
 averagenumhomefouls = {}
 averagenumawayfouls = {}
+variancehomefouls = {}
+varianceawayfouls = {}
 averagebias = {}
 for key, value in officialtohomefouls.items():
     averagenumhomefouls[key] = (float)(sum(value))/len(value)
     averagebias [key] = -1 * averagenumhomefouls[key]
+    variancehomefouls [key] = 0
+    for foul in officialtohomefouls[key]:
+        variancehomefouls[key]+= (averagenumhomefouls[key] - foul)**2
+    variancehomefouls[key] /= len (officialtohomefouls[key])
+
 for key, value in officialtoawayfouls.items():
     averagenumawayfouls[key] = (float)(sum(value))/len(value)
     averagebias [key] +=averagenumawayfouls[key]
+    varianceawayfouls [key] = 0
+    for foul in officialtoawayfouls[key]:
+        varianceawayfouls[key]+= (averagenumawayfouls[key] - foul)**2
+    varianceawayfouls[key] /= len (officialtoawayfouls[key])
 print "AWAY TEAM"
 print averagenumawayfouls
 print max (averagenumawayfouls.values())
@@ -71,7 +82,12 @@ print averagehome
 print "BIAS"
 print sorted(averagebias, key= lambda x: averagebias[x])
 
-f = open ("bias.csv", "w")
-for key, value in averagebias.items():
+print variancehomefouls
+
+
+f = open ("fouls.csv", "w")
+for key, value in variancehomefouls.items():
     f.write (str(key) + ","+str(value)+"\n")
+
+
 
