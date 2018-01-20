@@ -48,12 +48,12 @@ def writeJSON(file_path):
 
 	for player in home_player_stats:
 		#player stats, game id, team name, isHome, Against
-		player.extend([id, home_name, 1, visiting_name])
+		player.extend([id, home_name, True, visiting_name])
 		csvwriter.writerow(player)
 		
 	for player in visiting_player_stats:
 		#player stats, game id, team name, isHome, Against
-		player.extend([id, visiting_name, 0, home_name])
+		player.extend([id, visiting_name, False, home_name])
 		csvwriter.writerow(player)
 		
 
