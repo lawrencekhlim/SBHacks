@@ -1,3 +1,11 @@
+
+
+referees <- read.csv("Referees.csv")
+referees[,1:78] <- lapply(referees[, 1:78], function(x) as.logical(x))
+referees$Total.Fouls <- referees$Home.Team.Fouls + referees$Away.Team.Fouls
+
+
+
 mod <- lm(bias$bias~bias$seasons)
 summary(mod)
 library(ggplot2)
@@ -20,3 +28,5 @@ mod1 <- lm(players$Points~players$Assists+players$Won+players$FTA+players$FTM+pl
 summary(mod1)
 aov(mod1)
 anova(mod1)
+
+#referees[] <- lapply(referees, function(x) as.logical(x))
