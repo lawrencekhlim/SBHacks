@@ -2,6 +2,7 @@ import json
 import scipy
 import numpy as np
 from scipy import linalg
+import csv
 
 officialtohomefouls = {}
 officialtoawayfouls = {}
@@ -11,6 +12,7 @@ awaysum = 0
 
 matrixA = []
 vectorB = []
+vectorC = []
 
 for i in range (1, 668):
 
@@ -45,10 +47,19 @@ for i in range (1, 668):
 
     matrixA.append(row)
     vectorB.append([homefouls])
+    vectorC.append([awayfouls])
 
 vectorX = linalg.lstsq(matrixA,vectorB)
 
 print vectorX
+f = open ("Referees.csv", "w")
+csvwriter = csv.writer (f)
+csvwriter.writerow([i for i in range(78)] + ["Home Team Fouls", "Away Team Fouls"])
+for i in range (len (matrixA)):
+    csvwriter.writerow (matrixA[i]+ [vectorB[i][0], vectorC[i][0]])
+#f.write ("," + str () )
+
+
 f = open ("fouls.csv", "w")
 for i in range (len(vectorX)):
     f.write (str(i) + ","+str(vectorX[i])+"\n")
