@@ -1,11 +1,17 @@
 import json
-from pprint import pprint
+import scipy
+import numpy as np
+from scipy import linalg
 
 officialtohomefouls = {}
 officialtoawayfouls = {}
 
 homesum = 0
 awaysum = 0
+
+matrixA = []
+vectorB = []
+
 for i in range (1, 668):
 
     path = "data/game{:03d}.json".format(i)
@@ -32,6 +38,21 @@ for i in range (1, 668):
     awaysum += awayfouls
     #   print awayfouls
 
+    row = [0] * 78
+
+    for i in range (0, 3):
+        row[officials[i]] = 1
+
+    matrixA.append(row)
+    vectorB.append([homefouls])
+
+vectorX = linalg.lstsq(matrixA,vectorB)
+
+print vectorX
+f = open ("fouls.csv", "w")
+for i in range (len(vectorX)):
+    f.write (str(i) + ","+str(vectorX[i])+"\n")
+"""
     for official in officials:
         if official in officialtohomefouls:
             officialtohomefouls[official].append (homefouls)
@@ -85,9 +106,12 @@ print sorted(averagebias, key= lambda x: averagebias[x])
 print variancehomefouls
 
 
+
+
+
 f = open ("fouls.csv", "w")
 for key, value in variancehomefouls.items():
     f.write (str(key) + ","+str(value)+"\n")
 
-
+"""
 
