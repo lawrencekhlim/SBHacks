@@ -5,6 +5,14 @@ referees[,1:78] <- lapply(referees[, 1:78], function(x) as.logical(x))
 referees$Total.Fouls <- referees$Home.Team.Fouls + referees$Away.Team.Fouls
 
 
+xnam <- paste("`X",1:77,"`", sep="")
+formula_str <- paste(lapply(xnam, function(x) paste(x,xnam, sep="*", collapse="+")), collapse = "+")
+plzwrk <- as.formula(paste("`Home.Team.Fouls` ~", formula_str))
+plzwrk
+
+linear_mod <- lm(data=referees,formula=plzwrk)
+summary(linear_mod)
+
 
 mod <- lm(bias$bias~bias$seasons)
 summary(mod)
