@@ -40,27 +40,30 @@ def writeJSON(file_path):
 			
 	home_stats = data[u'hls']
 	home_name = home_stats[u'tc'] + home_stats[u'tn'] # team city + team name
+	home_points = int(home_stats[u's'])
 	home_player_stats = get_player_stats(home_stats[u'pstsg'])
+	
 
 	visiting_stats = data[u'vls']
 	visiting_name = visiting_stats[u'tc'] + visiting_stats[u'tn'] # team city + team name
+	visiting_points = int(visiting_stats[u's'])
 	visiting_player_stats = get_player_stats(visiting_stats[u'pstsg'])
 
 	for player in home_player_stats:
-		#player stats, game id, team name, isHome, Against
-		player.extend([id, home_name, True, visiting_name])
+		#player stats, game id, team name, isHome, Against, Won
+		player.extend([id, home_name, True, visiting_name, home_points > visiting_points])
 		csvwriter.writerow(player)
 		
 	for player in visiting_player_stats:
-		#player stats, game id, team name, isHome, Against
-		player.extend([id, visiting_name, False, home_name])
+		#player stats, game id, team name, isHome, Against, Won
+		player.extend([id, visiting_name, False, home_name, visiting_points > home_points])
 		csvwriter.writerow(player)
 		
 
 player_file = open("data/players.csv", "w")#, 'a')
 csvwriter = csv.writer(player_file)
 
-header = ["Player_Name", "Assists", "Blocks", "DREB", "FTA", "FTM", "OREB", "PF", "Points", "Rebounds", "Steals", "Seconds_Played", "Game_ID", "Team_Name", "isHome", "Playing_Against"]
+header = ["Player_Name", "Assists", "Blocks", "DREB", "FTA", "FTM", "OREB", "PF", "Points", "Rebounds", "Steals", "Seconds_Played", "Game_ID", "Team_Name", "isHome", "Playing_Against", "Won"]
 csvwriter.writerow(header)
 
 i = 0.0011
@@ -70,11 +73,4 @@ while i < 0.668:
 	except:
 		print("Not JSON")
 	i+=.001
-
-
-
-
-
-
-
 
