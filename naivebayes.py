@@ -10,7 +10,7 @@ nb=0
 # num not bias
 nnb=0
 #P(ref[i]=1|bias)
-skip = 78
+skip = 3
 prefb = [0]*(len(heads)-(4+skip))
 #P(ref[i]=1|not bias)
 prefnb = [0]*(len(prefb))
@@ -61,9 +61,9 @@ ncp = 0
 # num incorrect predictions
 nip = 0
 predbias =0
-minp = 0.01
-maxp = 0.99
-while maxp-minp>.001:
+minp = 0.0000000001
+maxp = 0.9999999999
+while maxp-minp>.00000000001:
     ncp = 0
     nip = 0
     predbias =0

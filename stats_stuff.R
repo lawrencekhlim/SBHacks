@@ -278,4 +278,8 @@ lapply(l, function(div){
 })
 
 tfr <- read_csv("techfoulratios.csv",col_names = TRUE)
-ggplot(tfr,aes(x=reorder(Team,got.cucked),y=got.cucked,fill=Team))+geom_col()+theme(axis.text.x = element_text(angle=90))+labs(x="Team",y="Num referees assessed techs/games > .3",title=paste("# of games in which a referee's (technical foul/games officiated) for a team ratio is above 0.3, divided by the number of games officiated",sep=""))
+ggplot(tfr,aes(x=reorder(Team,got.cucked),y=got.cucked,fill=Team))+
+  geom_col()+
+  scale_fill_manual(breaks = tfr$Team, values = tfr$color)+
+  theme(axis.text.x = element_text(angle=90))+
+  labs(x="Team",y="Num referees assessed techs/games > .3",title=paste("How Often Teams Get a Significant Number of Fouls",sep=""))
