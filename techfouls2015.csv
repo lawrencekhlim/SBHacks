@@ -1,19 +1,15 @@
-Official Num,Num Techs,Team
 3,0,76ers
 3,6,Bucks
 3,1,Bulls
-3,0,Cavaliers
 3,2,Celtics
 3,1,Clippers
 3,1,Grizzlies
 3,1,Hawks
 3,2,Heat
 3,0,Hornets
-3,0,Jazz
 3,1,Kings
 3,1,Knicks
 3,1,Lakers
-3,0,Magic
 3,1,Mavericks
 3,0,Nets
 3,0,Nuggets
@@ -48,7 +44,6 @@ Official Num,Num Techs,Team
 4,1,Nets
 4,1,Nuggets
 4,2,Pacers
-4,0,Pelicans
 4,4,Pistons
 4,2,Raptors
 4,1,Rockets
@@ -61,14 +56,12 @@ Official Num,Num Techs,Team
 4,0,Wizards
 5,0,76ers
 5,0,Bucks
-5,0,Bulls
 5,2,Cavaliers
 5,4,Celtics
 5,2,Clippers
 5,0,Grizzlies
 5,1,Hawks
 5,0,Heat
-5,0,Hornets
 5,0,Jazz
 5,1,Kings
 5,2,Knicks
@@ -96,7 +89,6 @@ Official Num,Num Techs,Team
 6,0,Celtics
 6,1,Clippers
 6,3,Grizzlies
-6,0,Hawks
 6,0,Heat
 6,1,Hornets
 6,0,Jazz
@@ -106,7 +98,6 @@ Official Num,Num Techs,Team
 6,0,Magic
 6,3,Mavericks
 6,1,Nets
-6,0,Nuggets
 6,0,Pacers
 6,1,Pelicans
 6,1,Pistons
@@ -117,7 +108,6 @@ Official Num,Num Techs,Team
 6,1,Thunder
 6,0,Timberwolves
 6,0,Trail Blazers
-6,0,Warriors
 6,1,Wizards
 7,1,76ers
 7,1,Bucks
@@ -147,13 +137,9 @@ Official Num,Num Techs,Team
 7,5,Thunder
 7,3,Timberwolves
 7,1,Trail Blazers
-7,0,Warriors
-7,0,Wizards
-8,0,76ers
 8,3,Bucks
 8,2,Bulls
 8,1,Cavaliers
-8,0,Celtics
 8,3,Clippers
 8,0,Grizzlies
 8,1,Hawks
@@ -180,7 +166,6 @@ Official Num,Num Techs,Team
 8,1,Warriors
 8,0,Wizards
 9,0,76ers
-9,0,Bucks
 9,2,Bulls
 9,1,Cavaliers
 9,1,Celtics
@@ -210,7 +195,6 @@ Official Num,Num Techs,Team
 9,2,Warriors
 9,0,Wizards
 10,0,76ers
-10,0,Bucks
 10,0,Bulls
 10,2,Cavaliers
 10,0,Celtics
@@ -260,7 +244,6 @@ Official Num,Num Techs,Team
 11,1,Pacers
 11,3,Pelicans
 11,0,Pistons
-11,0,Raptors
 11,0,Rockets
 11,0,Spurs
 11,1,Suns
@@ -286,7 +269,6 @@ Official Num,Num Techs,Team
 13,0,Magic
 13,2,Mavericks
 13,0,Nets
-13,0,Nuggets
 13,2,Pacers
 13,2,Pelicans
 13,1,Pistons
@@ -301,7 +283,6 @@ Official Num,Num Techs,Team
 13,2,Wizards
 14,0,76ers
 14,2,Bucks
-14,0,Bulls
 14,0,Cavaliers
 14,4,Celtics
 14,4,Clippers
@@ -315,11 +296,9 @@ Official Num,Num Techs,Team
 14,2,Lakers
 14,0,Magic
 14,1,Mavericks
-14,0,Nets
 14,0,Nuggets
 14,0,Pacers
 14,3,Pelicans
-14,0,Pistons
 14,2,Raptors
 14,3,Rockets
 14,0,Spurs
@@ -343,7 +322,6 @@ Official Num,Num Techs,Team
 15,8,Kings
 15,2,Knicks
 15,0,Lakers
-15,0,Magic
 15,1,Mavericks
 15,2,Nets
 15,1,Nuggets
@@ -361,7 +339,6 @@ Official Num,Num Techs,Team
 15,2,Wizards
 16,1,76ers
 16,1,Bucks
-16,0,Bulls
 16,0,Cavaliers
 16,0,Celtics
 16,0,Clippers
@@ -389,35 +366,15 @@ Official Num,Num Techs,Team
 16,0,Trail Blazers
 16,1,Warriors
 16,1,Wizards
-17,0,76ers
-17,0,Bucks
-17,0,Bulls
 17,0,Cavaliers
 17,2,Celtics
-17,0,Clippers
-17,0,Grizzlies
 17,0,Hawks
-17,0,Heat
 17,0,Hornets
 17,0,Jazz
-17,0,Kings
-17,0,Knicks
-17,0,Lakers
 17,0,Magic
-17,0,Mavericks
-17,0,Nets
-17,0,Nuggets
 17,0,Pacers
-17,0,Pelicans
 17,2,Pistons
-17,0,Raptors
-17,0,Rockets
-17,0,Spurs
-17,0,Suns
 17,0,Thunder
-17,0,Timberwolves
-17,0,Trail Blazers
-17,0,Warriors
 17,0,Wizards
 18,1,76ers
 18,1,Bucks
@@ -425,7 +382,6 @@ Official Num,Num Techs,Team
 18,2,Cavaliers
 18,0,Celtics
 18,6,Clippers
-18,0,Grizzlies
 18,2,Hawks
 18,1,Heat
 18,0,Hornets
@@ -435,9 +391,7 @@ Official Num,Num Techs,Team
 18,0,Lakers
 18,0,Magic
 18,0,Mavericks
-18,0,Nets
 18,0,Nuggets
-18,0,Pacers
 18,0,Pelicans
 18,0,Pistons
 18,3,Raptors
@@ -452,7 +406,6 @@ Official Num,Num Techs,Team
 19,0,76ers
 19,1,Bucks
 19,1,Bulls
-19,0,Cavaliers
 19,0,Celtics
 19,4,Clippers
 19,2,Grizzlies
@@ -461,7 +414,6 @@ Official Num,Num Techs,Team
 19,1,Hornets
 19,0,Jazz
 19,1,Kings
-19,0,Knicks
 19,0,Lakers
 19,0,Magic
 19,2,Mavericks
@@ -470,8 +422,6 @@ Official Num,Num Techs,Team
 19,2,Pacers
 19,0,Pelicans
 19,3,Pistons
-19,0,Raptors
-19,0,Rockets
 19,2,Spurs
 19,1,Suns
 19,0,Thunder
@@ -493,7 +443,6 @@ Official Num,Num Techs,Team
 20,1,Kings
 20,4,Knicks
 20,0,Lakers
-20,0,Magic
 20,0,Mavericks
 20,1,Nets
 20,1,Nuggets
@@ -501,7 +450,6 @@ Official Num,Num Techs,Team
 20,0,Pelicans
 20,0,Pistons
 20,2,Raptors
-20,0,Rockets
 20,0,Spurs
 20,1,Suns
 20,2,Thunder
@@ -513,7 +461,6 @@ Official Num,Num Techs,Team
 21,1,Bucks
 21,0,Bulls
 21,0,Cavaliers
-21,0,Celtics
 21,4,Clippers
 21,0,Grizzlies
 21,0,Hawks
@@ -528,7 +475,6 @@ Official Num,Num Techs,Team
 21,3,Nets
 21,0,Nuggets
 21,0,Pacers
-21,0,Pelicans
 21,2,Pistons
 21,3,Raptors
 21,2,Rockets
@@ -542,8 +488,6 @@ Official Num,Num Techs,Team
 22,0,76ers
 22,1,Bucks
 22,1,Bulls
-22,0,Cavaliers
-22,0,Celtics
 22,0,Clippers
 22,1,Grizzlies
 22,0,Hawks
@@ -564,9 +508,7 @@ Official Num,Num Techs,Team
 22,0,Rockets
 22,0,Spurs
 22,1,Suns
-22,0,Thunder
 22,4,Timberwolves
-22,0,Trail Blazers
 22,0,Warriors
 22,0,Wizards
 23,0,76ers
@@ -610,7 +552,6 @@ Official Num,Num Techs,Team
 24,1,Heat
 24,0,Hornets
 24,0,Jazz
-24,0,Kings
 24,0,Knicks
 24,1,Lakers
 24,0,Magic
@@ -623,8 +564,6 @@ Official Num,Num Techs,Team
 24,2,Raptors
 24,5,Rockets
 24,5,Spurs
-24,0,Suns
-24,0,Thunder
 24,0,Timberwolves
 24,0,Trail Blazers
 24,1,Warriors
@@ -643,7 +582,6 @@ Official Num,Num Techs,Team
 25,1,Kings
 25,4,Knicks
 25,0,Lakers
-25,0,Magic
 25,0,Mavericks
 25,0,Nets
 25,0,Nuggets
@@ -661,9 +599,7 @@ Official Num,Num Techs,Team
 25,0,Wizards
 26,0,76ers
 26,3,Bucks
-26,0,Bulls
 26,0,Cavaliers
-26,0,Celtics
 26,0,Clippers
 26,2,Grizzlies
 26,0,Hawks
@@ -682,12 +618,10 @@ Official Num,Num Techs,Team
 26,5,Pistons
 26,2,Raptors
 26,1,Rockets
-26,0,Spurs
 26,2,Suns
 26,3,Thunder
 26,0,Timberwolves
 26,1,Trail Blazers
-26,0,Warriors
 26,1,Wizards
 27,2,76ers
 27,1,Bucks
@@ -698,7 +632,6 @@ Official Num,Num Techs,Team
 27,0,Grizzlies
 27,1,Hawks
 27,1,Heat
-27,0,Hornets
 27,0,Jazz
 27,5,Kings
 27,0,Knicks
@@ -712,7 +645,6 @@ Official Num,Num Techs,Team
 27,1,Pistons
 27,2,Raptors
 27,1,Rockets
-27,0,Spurs
 27,1,Suns
 27,2,Thunder
 27,0,Timberwolves
@@ -750,7 +682,6 @@ Official Num,Num Techs,Team
 28,0,Warriors
 28,2,Wizards
 29,1,76ers
-29,0,Bucks
 29,0,Bulls
 29,0,Cavaliers
 29,1,Celtics
@@ -821,18 +752,15 @@ Official Num,Num Techs,Team
 31,2,Hornets
 31,0,Jazz
 31,5,Kings
-31,0,Knicks
 31,1,Lakers
 31,3,Magic
 31,1,Mavericks
 31,0,Nets
 31,1,Nuggets
 31,0,Pacers
-31,0,Pelicans
 31,3,Pistons
 31,2,Raptors
 31,1,Rockets
-31,0,Spurs
 31,0,Suns
 31,0,Thunder
 31,0,Timberwolves
@@ -882,7 +810,6 @@ Official Num,Num Techs,Team
 33,2,Jazz
 33,1,Kings
 33,0,Knicks
-33,0,Lakers
 33,5,Magic
 33,4,Mavericks
 33,0,Nets
@@ -905,9 +832,7 @@ Official Num,Num Techs,Team
 34,0,Cavaliers
 34,0,Celtics
 34,2,Clippers
-34,0,Grizzlies
 34,0,Hawks
-34,0,Heat
 34,0,Hornets
 34,0,Jazz
 34,11,Kings
@@ -924,7 +849,6 @@ Official Num,Num Techs,Team
 34,2,Rockets
 34,1,Spurs
 34,2,Suns
-34,0,Thunder
 34,2,Timberwolves
 34,0,Trail Blazers
 34,1,Warriors
@@ -954,19 +878,15 @@ Official Num,Num Techs,Team
 35,0,Rockets
 35,0,Spurs
 35,0,Suns
-35,0,Thunder
 35,0,Timberwolves
 35,1,Trail Blazers
 35,1,Warriors
 35,1,Wizards
-36,0,76ers
 36,2,Bucks
 36,0,Bulls
 36,0,Cavaliers
 36,1,Celtics
 36,2,Clippers
-36,0,Grizzlies
-36,0,Hawks
 36,1,Heat
 36,0,Hornets
 36,1,Jazz
@@ -980,7 +900,6 @@ Official Num,Num Techs,Team
 36,0,Pacers
 36,0,Pelicans
 36,4,Pistons
-36,0,Raptors
 36,1,Rockets
 36,1,Spurs
 36,0,Suns
@@ -999,7 +918,6 @@ Official Num,Num Techs,Team
 37,0,Hawks
 37,4,Heat
 37,3,Hornets
-37,0,Jazz
 37,0,Kings
 37,0,Knicks
 37,1,Lakers
@@ -1023,14 +941,12 @@ Official Num,Num Techs,Team
 38,2,Bucks
 38,0,Bulls
 38,0,Cavaliers
-38,0,Celtics
 38,3,Clippers
 38,1,Grizzlies
 38,0,Hawks
 38,2,Heat
 38,0,Hornets
 38,0,Jazz
-38,0,Kings
 38,0,Knicks
 38,0,Lakers
 38,2,Magic
@@ -1057,23 +973,18 @@ Official Num,Num Techs,Team
 39,0,Clippers
 39,3,Grizzlies
 39,0,Hawks
-39,0,Heat
 39,0,Hornets
 39,0,Jazz
-39,0,Kings
 39,3,Knicks
 39,0,Lakers
 39,0,Magic
-39,0,Mavericks
 39,1,Nets
-39,0,Nuggets
 39,0,Pacers
 39,0,Pelicans
 39,0,Pistons
 39,2,Raptors
 39,5,Rockets
 39,1,Spurs
-39,0,Suns
 39,1,Thunder
 39,1,Timberwolves
 39,0,Trail Blazers
@@ -1113,7 +1024,6 @@ Official Num,Num Techs,Team
 41,0,Bucks
 41,0,Bulls
 41,1,Cavaliers
-41,0,Celtics
 41,1,Clippers
 41,3,Grizzlies
 41,0,Hawks
@@ -1140,7 +1050,6 @@ Official Num,Num Techs,Team
 41,0,Warriors
 41,0,Wizards
 42,2,76ers
-42,0,Bucks
 42,1,Bulls
 42,0,Cavaliers
 42,2,Celtics
@@ -1150,7 +1059,6 @@ Official Num,Num Techs,Team
 42,0,Heat
 42,0,Hornets
 42,0,Jazz
-42,0,Kings
 42,3,Knicks
 42,1,Lakers
 42,2,Magic
@@ -1158,7 +1066,6 @@ Official Num,Num Techs,Team
 42,1,Nets
 42,2,Nuggets
 42,0,Pacers
-42,0,Pelicans
 42,0,Pistons
 42,2,Raptors
 42,1,Rockets
@@ -1188,7 +1095,6 @@ Official Num,Num Techs,Team
 43,0,Nets
 43,1,Nuggets
 43,0,Pacers
-43,0,Pelicans
 43,7,Pistons
 43,1,Raptors
 43,1,Rockets
@@ -1216,7 +1122,6 @@ Official Num,Num Techs,Team
 44,0,Magic
 44,2,Mavericks
 44,1,Nets
-44,0,Nuggets
 44,0,Pacers
 44,0,Pelicans
 44,1,Pistons
@@ -1237,9 +1142,6 @@ Official Num,Num Techs,Team
 45,3,Clippers
 45,1,Grizzlies
 45,0,Hawks
-45,0,Heat
-45,0,Hornets
-45,0,Jazz
 45,6,Kings
 45,1,Knicks
 45,0,Lakers
@@ -1247,7 +1149,6 @@ Official Num,Num Techs,Team
 45,0,Mavericks
 45,0,Nets
 45,1,Nuggets
-45,0,Pacers
 45,1,Pelicans
 45,0,Pistons
 45,1,Raptors
@@ -1272,7 +1173,6 @@ Official Num,Num Techs,Team
 46,0,Jazz
 46,3,Kings
 46,0,Knicks
-46,0,Lakers
 46,2,Magic
 46,5,Mavericks
 46,1,Nets
@@ -1297,7 +1197,6 @@ Official Num,Num Techs,Team
 47,2,Clippers
 47,0,Grizzlies
 47,0,Hawks
-47,0,Heat
 47,0,Hornets
 47,2,Jazz
 47,3,Kings
@@ -1306,9 +1205,7 @@ Official Num,Num Techs,Team
 47,0,Magic
 47,1,Mavericks
 47,2,Nets
-47,0,Nuggets
 47,3,Pacers
-47,0,Pelicans
 47,0,Pistons
 47,2,Raptors
 47,1,Rockets
@@ -1318,7 +1215,6 @@ Official Num,Num Techs,Team
 47,1,Timberwolves
 47,1,Trail Blazers
 47,0,Warriors
-47,0,Wizards
 48,1,76ers
 48,1,Bucks
 48,0,Bulls
@@ -1345,7 +1241,6 @@ Official Num,Num Techs,Team
 48,0,Spurs
 48,4,Suns
 48,2,Thunder
-48,0,Timberwolves
 48,1,Trail Blazers
 48,0,Warriors
 48,0,Wizards
@@ -1358,18 +1253,15 @@ Official Num,Num Techs,Team
 49,0,Grizzlies
 49,0,Hawks
 49,1,Heat
-49,0,Hornets
 49,2,Jazz
 49,0,Kings
 49,1,Knicks
 49,0,Lakers
 49,10,Magic
 49,5,Mavericks
-49,0,Nets
 49,3,Nuggets
 49,1,Pacers
 49,3,Pelicans
-49,0,Pistons
 49,0,Raptors
 49,3,Rockets
 49,1,Spurs
@@ -1388,7 +1280,6 @@ Official Num,Num Techs,Team
 50,0,Grizzlies
 50,0,Hawks
 50,0,Heat
-50,0,Hornets
 50,0,Jazz
 50,2,Kings
 50,1,Knicks
@@ -1399,7 +1290,6 @@ Official Num,Num Techs,Team
 50,1,Nuggets
 50,2,Pacers
 50,0,Pelicans
-50,0,Pistons
 50,1,Raptors
 50,1,Rockets
 50,0,Spurs
@@ -1423,14 +1313,12 @@ Official Num,Num Techs,Team
 52,1,Kings
 52,1,Knicks
 52,3,Lakers
-52,0,Magic
 52,0,Mavericks
 52,1,Nets
 52,0,Nuggets
 52,0,Pacers
 52,2,Pelicans
 52,3,Pistons
-52,0,Raptors
 52,1,Rockets
 52,0,Spurs
 52,1,Suns
@@ -1441,7 +1329,6 @@ Official Num,Num Techs,Team
 52,0,Wizards
 55,0,76ers
 55,0,Bucks
-55,0,Bulls
 55,0,Cavaliers
 55,1,Celtics
 55,0,Clippers
@@ -1518,7 +1405,6 @@ Official Num,Num Techs,Team
 58,0,Nets
 58,1,Nuggets
 58,5,Pacers
-58,0,Pelicans
 58,2,Pistons
 58,2,Raptors
 58,1,Rockets
@@ -1572,7 +1458,6 @@ Official Num,Num Techs,Team
 60,0,Jazz
 60,4,Kings
 60,1,Knicks
-60,0,Lakers
 60,0,Magic
 60,2,Mavericks
 60,0,Nets
@@ -1618,7 +1503,6 @@ Official Num,Num Techs,Team
 61,5,Timberwolves
 61,0,Trail Blazers
 61,5,Warriors
-61,0,Wizards
 63,0,76ers
 63,1,Bucks
 63,0,Bulls
@@ -1629,15 +1513,12 @@ Official Num,Num Techs,Team
 63,0,Hawks
 63,1,Heat
 63,1,Hornets
-63,0,Jazz
-63,0,Kings
 63,8,Knicks
 63,0,Lakers
 63,0,Magic
 63,2,Mavericks
 63,1,Nets
 63,4,Nuggets
-63,0,Pacers
 63,3,Pelicans
 63,2,Pistons
 63,1,Raptors
@@ -1648,14 +1529,11 @@ Official Num,Num Techs,Team
 63,0,Timberwolves
 63,0,Trail Blazers
 63,0,Warriors
-63,0,Wizards
 64,0,76ers
-64,0,Bucks
 64,1,Bulls
 64,5,Cavaliers
 64,2,Celtics
 64,1,Clippers
-64,0,Grizzlies
 64,0,Hawks
 64,1,Heat
 64,0,Hornets
@@ -1668,11 +1546,9 @@ Official Num,Num Techs,Team
 64,0,Nets
 64,1,Nuggets
 64,0,Pacers
-64,0,Pelicans
 64,2,Pistons
 64,0,Raptors
 64,0,Rockets
-64,0,Spurs
 64,0,Suns
 64,0,Thunder
 64,2,Timberwolves
@@ -1682,7 +1558,6 @@ Official Num,Num Techs,Team
 66,0,76ers
 66,2,Bucks
 66,0,Bulls
-66,0,Cavaliers
 66,0,Celtics
 66,1,Clippers
 66,0,Grizzlies
@@ -1700,7 +1575,6 @@ Official Num,Num Techs,Team
 66,0,Pacers
 66,1,Pelicans
 66,1,Pistons
-66,0,Raptors
 66,0,Rockets
 66,1,Spurs
 66,0,Suns
@@ -1711,60 +1585,36 @@ Official Num,Num Techs,Team
 66,0,Wizards
 67,0,76ers
 67,0,Bucks
-67,0,Bulls
-67,0,Cavaliers
-67,0,Celtics
-67,0,Clippers
 67,0,Grizzlies
 67,0,Hawks
 67,0,Heat
 67,0,Hornets
 67,0,Jazz
 67,0,Kings
-67,0,Knicks
 67,0,Lakers
 67,3,Magic
-67,0,Mavericks
 67,0,Nets
 67,1,Nuggets
 67,0,Pacers
-67,0,Pelicans
-67,0,Pistons
-67,0,Raptors
 67,1,Rockets
-67,0,Spurs
 67,0,Suns
 67,0,Thunder
-67,0,Timberwolves
 67,1,Trail Blazers
-67,0,Warriors
 67,0,Wizards
-68,0,76ers
 68,0,Bucks
 68,0,Bulls
 68,0,Cavaliers
 68,1,Celtics
-68,0,Clippers
-68,0,Grizzlies
-68,0,Hawks
 68,0,Heat
 68,0,Hornets
-68,0,Jazz
 68,0,Kings
 68,1,Knicks
-68,0,Lakers
 68,0,Magic
 68,0,Mavericks
 68,0,Nets
-68,0,Nuggets
 68,0,Pacers
-68,0,Pelicans
 68,0,Pistons
-68,0,Raptors
 68,1,Rockets
-68,0,Spurs
-68,0,Suns
-68,0,Thunder
 68,0,Timberwolves
 68,0,Trail Blazers
 68,0,Warriors
@@ -1780,7 +1630,6 @@ Official Num,Num Techs,Team
 70,3,Heat
 70,1,Hornets
 70,1,Jazz
-70,0,Kings
 70,2,Knicks
 70,1,Lakers
 70,1,Magic
@@ -1820,7 +1669,6 @@ Official Num,Num Techs,Team
 71,5,Pacers
 71,0,Pelicans
 71,1,Pistons
-71,0,Raptors
 71,0,Rockets
 71,0,Spurs
 71,1,Suns
@@ -1832,7 +1680,6 @@ Official Num,Num Techs,Team
 72,0,76ers
 72,3,Bucks
 72,0,Bulls
-72,0,Cavaliers
 72,0,Celtics
 72,3,Clippers
 72,3,Grizzlies
@@ -1850,7 +1697,6 @@ Official Num,Num Techs,Team
 72,2,Pacers
 72,0,Pelicans
 72,0,Pistons
-72,0,Raptors
 72,2,Rockets
 72,0,Spurs
 72,3,Suns
@@ -1859,12 +1705,10 @@ Official Num,Num Techs,Team
 72,2,Trail Blazers
 72,1,Warriors
 72,1,Wizards
-73,0,76ers
 73,1,Bucks
 73,0,Bulls
 73,1,Cavaliers
 73,0,Celtics
-73,0,Clippers
 73,0,Grizzlies
 73,0,Hawks
 73,1,Heat
@@ -1885,7 +1729,6 @@ Official Num,Num Techs,Team
 73,4,Spurs
 73,0,Suns
 73,2,Thunder
-73,0,Timberwolves
 73,0,Trail Blazers
 73,1,Warriors
 73,0,Wizards
@@ -1911,60 +1754,29 @@ Official Num,Num Techs,Team
 74,2,Pelicans
 74,0,Pistons
 74,0,Raptors
-74,0,Rockets
 74,1,Spurs
 74,2,Suns
 74,2,Thunder
 74,1,Timberwolves
 74,1,Trail Blazers
 74,0,Warriors
-74,0,Wizards
 75,1,76ers
-75,0,Bucks
-75,0,Bulls
 75,0,Cavaliers
-75,0,Celtics
-75,0,Clippers
-75,0,Grizzlies
-75,0,Hawks
 75,1,Heat
-75,0,Hornets
 75,0,Jazz
-75,0,Kings
-75,0,Knicks
-75,0,Lakers
-75,0,Magic
-75,0,Mavericks
-75,0,Nets
 75,1,Nuggets
-75,0,Pacers
-75,0,Pelicans
-75,0,Pistons
-75,0,Raptors
-75,0,Rockets
 75,0,Spurs
-75,0,Suns
-75,0,Thunder
-75,0,Timberwolves
-75,0,Trail Blazers
-75,0,Warriors
-75,0,Wizards
 77,0,76ers
 77,2,Bucks
 77,1,Bulls
 77,1,Cavaliers
-77,0,Celtics
 77,2,Clippers
-77,0,Grizzlies
-77,0,Hawks
 77,3,Heat
 77,0,Hornets
 77,2,Jazz
-77,0,Kings
 77,3,Knicks
 77,1,Lakers
 77,1,Magic
-77,0,Mavericks
 77,0,Nets
 77,2,Nuggets
 77,1,Pacers
