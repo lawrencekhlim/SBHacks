@@ -1,4 +1,7 @@
 #options(max.print=1000000)
+library('ggplot2')
+library('forcats')
+library('reshape2')
 
 create_data <- function(file_path){
   referees <- read.csv(file_path)
@@ -24,6 +27,28 @@ make_linear_model <- function(data){
   linear_mod <- lm(data=referees,formula=plzwrk)
   return(linear_mod)
 }
+
+
+make_bias_plots <- function(){
+  fouls <- read.csv('normalizedHomeFouls.csv')
+  colnames(fouls) <- c('Referee', 'Home', 'Away', 'Home-Away')
+#  fouls <- fouls[fouls$Fouls_Called > 1,]
+  fouls <- fouls[,1:3]
+  
+  fouls <- melt(fouls)
+  
+  
+  #reorder(Referee, -Home.Fouls)
+  
+  foul_plot <- ggplot(data = fouls,aes(x=reorder(Referee, -value), y=value, fill=variable)) +
+    geom_col(position="dodge")+
+    scale_fill_manual(breaks = c("Home", "Away"), values = c("grey30", "sienna1"))+
+    labs(x="Referee", y="Fouls Called", title="How Many Fouls Each Referee Calls in the NBA", fill="Team")+
+    theme(axis.text.x = element_text(angle=90))
+  foul_plot
+  return(foul_plot)
+}
+make_bias_plots()
 
 #ref2015 <- create_data('Referees2015.csv')
 #ref2015$isTrain <- runif(nrow(ref2015)) < 0.75
