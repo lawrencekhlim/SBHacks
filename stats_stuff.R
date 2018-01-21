@@ -152,10 +152,6 @@ write.csv(ref_val, "Referees-Validation.csv", row.names = F)
 
 
 
-
-
-
-
 #Not Yash's
 lm_mod_hf<-make_linear_model()
 summary(lm_mod_hf)
