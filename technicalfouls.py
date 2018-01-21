@@ -5,7 +5,6 @@ from scipy import linalg
 import csv
 import copy
 
-<<<<<<< HEAD
 officialsNames = {
     3:"Nick Buchert",
     4:"Sean Wright",
@@ -112,10 +111,10 @@ teams = {
 "Jazz": 0,
 "Wizards": 0
 }
-=======
->>>>>>> 2f5042dec5ba4c7e35658500aa2a84949e46e7cc
+
 #key = officalnum, value = dict with key being team name and val being number of techs
 officialtechs = {}
+officialteams = {}
 
 for i in range (1, 668):
     path = "data/Yr17game{:03d}.json".format(i)
@@ -143,25 +142,35 @@ for i in range (1, 668):
     for official in officials:
         if official not in officialtechs:
             officialtechs[official] = {}
+            officialteams[official] = {}
             officialtechs[official][hometeamname] = hometechfouls
+            officialteams[official][hometeamname] = 1
         else:
             if hometeamname not in officialtechs[official]:
                 officialtechs[official][hometeamname] = hometechfouls
+                officialteams[official][hometeamname] = 1
             else:
                 officialtechs[official][hometeamname] += hometechfouls
+                officialteams[official][hometeamname] += 1
 
         if official not in officialtechs:
             officialtechs[official] = {}
+            officialteams[official] = {}
             officialtechs[official][awayteamname] = awaytechfouls
+            officialteams[official][awayteamname] = 1
+
         else:
             if awayteamname not in officialtechs[official]:
                 officialtechs[official][awayteamname] = awaytechfouls
+                officialteams[official][awayteamname] = 1
             else:
                 officialtechs[official][awayteamname] += awaytechfouls
+                officialteams[official][awayteamname] += 1
+
 
 f = open("techfouls2017.csv", "w")
 for officialnum in sorted(officialtechs.keys(), key = lambda x: x):
     for team in sorted(officialtechs[officialnum], key = lambda x: x):
-        f.write(str(officialnum) + "," + str(officialtechs[officialnum][team]) + "," + str(team) + "\n")
+        f.write(str(officialnum) + "," + str(officialtechs[officialnum][team]) + "," + str(officialteams[officialnum][team]) + "," + str(officialtechs[officialnum][team]/officialteams[officialnum][team]) + "," + str(team) + "\n")
 f.close()
 
