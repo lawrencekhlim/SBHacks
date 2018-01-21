@@ -5,7 +5,7 @@ library('reshape2')
 
 create_data <- function(file_path){
   referees <- read.csv(file_path)
-  referees[,1:108] <- lapply(referees[, 1:108], function(x) as.logical(x))
+#  referees[,1:108] <- lapply(referees[, 1:108], function(x) as.logical(x))
   referees$Total.Fouls <- referees$Home.Team.Fouls + referees$Away.Team.Fouls
   referees$Bias <- referees$Home.Team.Fouls < referees$Away.Team.Fouls
   
@@ -138,11 +138,11 @@ summary(predictions)
 
 mean(abs(referees$Total.Fouls - mean(referees$Total.Fouls)))
 
+lapply(colnames(ref2016)[1:78], function(x) sum(ref2016[x]))
 
-
-
-
-
+ref_train<-read.csv('Referees-Training.csv')
+ref2016<-ref2016[, order(colSums(ref2016))]
+write.csv(ref2016, "Referees2016.csv", row.names = F)
 
 
 
@@ -249,7 +249,7 @@ library(readr)
 techfouls <- read_csv("techfouls2015-2017.csv", col_names = FALSE)
 colnames(techfouls)<-c("Ref","TF","Teams")
 atlantic <- c('Atlantic','Celtics','Raptors','76ers','Knicks','Nets')
-central <- c('central','Cavaliers','Pacers','Bucks','Pistons','Bulls')
+central <- c('Central','Cavaliers','Pacers','Bucks','Pistons','Bulls')
 southeast <- c('Southeast','Heat','Wizards','Hornets','Hawks','Magic')
 northwest <- c('Northwest','Timberwolves','Thunder','Trail Blazers','Nuggets','Jazz')
 pacific <- c('Pacific','Warriors','Clippers','Suns','Lakers','Kings')
@@ -274,5 +274,5 @@ wtf <- read_csv("techfouls2015-7.csv",col_names = FALSE)
 colnames(wtf)<-c("Ref","TF","Games.Refd","Weighted.TF","Teams")
 
 lapply(l, function(div){
-  ggplot(wtf[wtf$Teams %in% div,], aes(x=reorder(Ref,-Weighted.TF),y=Weighted.TF,fill=Teams)) +  geom_col()+theme(axis.text.x = element_text(angle=90))+labs(x="Referees",y="average technical fouls",title=div[1])
+  ggplot(wtf[wtf$Teams %in% div,], aes(x=reorder(Ref,-Weighted.TF),y=Weighted.TF,fill=Teams)) +  geom_col()+theme(axis.text.x = element_text(angle=90))+labs(x="Referees",y="average technical fouls",title=paste("Average Number of Technical Fouls assesed by each referee to the ",div[1]," Division",sep=""))
 })

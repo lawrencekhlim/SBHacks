@@ -1,25 +1,45 @@
-from make_graph import MakeGraph
-figurexvals = []
-figureyvals = []
+#key: ref, val: dict with key team, val num techs
+refereeTechs = {}
 
-refteamtechs = {}
-for line in open("techfouls2015.csv", "r"):
-    line = line.split(",")
-    refnum, numtechs, team = int(line[0]), int(line[1]), line[2]
-    if refnum not in refteamtechs:
-        refteamtechs[refnum] = {}
-        refteamtechs[refnum][team] = numtechs
-    else:
-        if team not in refteamtechs[refnum]:
-            refteamtechs[refnum][team] = numtechs
+#key: ref, val: dict with key team, val num games
+refereeGames = {}
+
+for line in open("techfouls2015-7.csv", "r"):
+    line = line.strip().split(",")
+    refname, numtechs, numgames, techave, teamname = line
+    teamname = line[4]
+    
+    if refname not in refereeTechs:
+        refereeTechs[refname] = {}
+    if teamname not in refereeTechs[refname]:
+        refereeTechs[refname][teamname] = 0
+    refereeTechs[refname][teamname] += int(numtechs)
+
+    if refname not in refereeGames:
+        refereeGames[refname] = {}
+    if teamname not in refereeGames[refname]:
+        refereeGames[refname][teamname] = 0
+    refereeGames[refname][teamname] += int(numgames)
+
+
+cutoff = 0.3
+teamAboveCutoff = {}
+teamBelowCutoff = {}
+
+for ref in refereeTechs:
+    for team, numtechs in refereeTechs[ref].items():
+        if team not in teamAboveCutoff:
+            teamAboveCutoff[team] = 0
+            teamBelowCutoff[team] = 0
+        if refereeTechs[ref][team]/refereeGames[ref][team] >= cutoff:
+            teamAboveCutoff[team] += 1
         else:
-            print("ERROR")
+            teamBelowCutoff[team] += 1
 
-    figurexvals.append(refnum)
-    figureyvals.append(numtechs)
+f = open("techfoulratios.csv", "w")
+for team, numcutoff in teamAboveCutoff.items():
+    f.write(team + "," + str(numcutoff) + "," + str(teamBelowCutoff[team] + teamAboveCutoff[team]) + "\n")
 
-color = ["brown","brown","black", "cyan","cyan", "cyan", "magenta", "black", "magenta", "magenta", "black", "orange","orange", "orange","red", "red","red","black","yellow", "yellow", "black", "yellow", "green", "green", "green","black", "blue","blue"]*100
-graph = MakeGraph()
-graph.draw_figure_no_sort(figurexvals, figureyvals, "Referee Number", "Number of Technical Fouls", "Referees are power hungry dudes", color)
-graph.show_plts()
+f.close()
+
 
