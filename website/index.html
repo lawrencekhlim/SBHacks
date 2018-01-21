@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-    <body background="bball.png"/>
+    <body background="bball3.jpeg", style="background-position:center";/>
       <p style="font-size:60px; text-align:center;">Hacking NBA Referees!</p>
     <br>
     
@@ -34,15 +34,19 @@
     <br>
     <br>
     
-    <img src="WinBackMoneySingle.png" style="height:500px;width:1000px; display:block; margin: 0 auto;"/>
+    <img src="../img/IndividualFouls.png" style="height:500px;width:1000px; display:block; margin: 0 auto;"/>
     <br>
     <div align="center" style="font-size:25px;  width:1000px;  margin: 0 auto">
     Notable Trends/Observations:
     <ul style="list-style-type:disc; font-size:20px; text-align:center; margin: 0 auto">
-        <li>Mediterranean Ave. is by far the worst. The property takes 30 instances of people landing on it in order to pay its cost back through its basic rent, and on top of that, it is one of the most uncommonly landed on squares in the game.</li>
-        <li>The Railroads and Utilities are good for quick money. Their rents can jump up to the highest out of all the rents in the game. However, because you cannot build houses on these properties, they are only good for early game if you can hold multiple of each.</li>
-        <li>Illinois Ave. and Boardwalk make their money back the quickest through rent. Illinois Ave. is the second most popular square on the board (behind Jail Cell), and Boardwalk has a high rent in comparison to its buy cost.</li>
-        <li>The formula we used to calculate rolls needed: Number_of_turns_to_break_even = (Cost)/(Rent*Probability_to_land_on_it)</li>
+        <li>From the previous graph, we adjusted for the fact that other referees make their own calls, which can increase the number of foul calls for the other referees on the court. We adjusted
+            this using least square approximation which led to an estimation of the number of foul calls an indiviual referee will make.</li>
+        <li>For instance, for referees Monty McCutchen, Michael Smith, and Brian Forte, the total number of foul calls they called on the visiting team was 24. Let the number of calls that Monty
+            McCutchen made be x1, the number of calls that Michael Smith made be x2, and the number of calls that Brian Forte made be x3. Then the number of calls can be represented by x1 + x2 +
+            x3 = 24. Taking this equation from every game in the season, we minimized the square error for each referee to get the number of calls that each referee makes.
+            </li>
+        <li>As you can see from the results of this graph and the previous one, referees Kevin Cutler and Leroy Richardson have wide discrepancies between the number of calls they give for
+            the home team and the number of calls they give the visiting team.</li>
     </ul>
     </div>
     
