@@ -262,9 +262,9 @@ csvwriter.writerow(arr + ["Home Team Fouls", "Away Team Fouls", "Total Team Foul
 csvwriter2.writerow(arr + ["Home Team Fouls", "Away Team Fouls", "Total Team Fouls"])
 for i in range (len (matrixTotal)):
     if random () <= 0.75:
-        csvwriter.writerow (matrixTotal[i] + [vectorB[i][0], vectorC[i][0], vectorTotal[i][0]])
+        csvwriter.writerow (matrixTotal[i] + [vectorB[i][0], vectorC[i][0], vectorTotal[i][0],"1" if vectorC[i][0]-vectorB[i][0] >= 5 else "0"])
     else:
-        csvwriter2.writerow (matrixTotal[i] + [vectorB[i][0], vectorC[i][0], vectorTotal[i][0]])
+        csvwriter2.writerow (matrixTotal[i] + [vectorB[i][0], vectorC[i][0], vectorTotal[i][0],"1" if vectorC[i][0]-vectorB[i][0] >= 5 else "0"])
 f2.close()
 f3.close()
 
