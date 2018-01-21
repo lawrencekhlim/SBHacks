@@ -69,10 +69,11 @@ matrixD = []
 matrixTotal = []
 vectorB = []
 vectorC = []
+vectorTotal = []
 
 for i in range (1, 668):
 
-    path = "data/Yr16game{:03d}.json".format(i)
+    path = "data/Yr17game{:03d}.json".format(i)
     print path
     json_file = open(path, "r")
     json_text = json_file.read()
@@ -112,6 +113,7 @@ for i in range (1, 668):
     
     matrixTotal.append (row + teams)
     matrixA.append(row)
+    vectorTotal.append ([homefouls + awayfouls])
     vectorB.append([homefouls])
     vectorC.append([awayfouls])
 
@@ -166,17 +168,19 @@ print sorted(averagebias, key= lambda x: averagebias[x])
 print variancehomefouls
 
 
-vectorX = linalg.lstsq(matrixTotal,vectorB)
+vectorX = linalg.lstsq(matrixTotal,vectorTotal)
+
+
 arr = [i for i in range(78)] +[key for key in sorted(teamnameID, key= lambda x: teamnameID[x])]
 for i in range (len (vectorX[3])):
     print (str(arr[i]) + ": " + str(vectorX [3][i]) )
 
 
-f = open ("Referees2016.csv", "w")
+f = open ("Referees.csv", "w")
 csvwriter = csv.writer (f)
 
-csvwriter.writerow(arr + ["Home Team Fouls", "Away Team Fouls"])
+csvwriter.writerow(arr + ["Home Team Fouls", "Away Team Fouls", "Total Team Fouls"])
 for i in range (len (matrixTotal)):
-    csvwriter.writerow (matrixTotal[i] + [vectorB[i][0], vectorC[i][0]])
+    csvwriter.writerow (matrixTotal[i] + [vectorB[i][0], vectorC[i][0], vectorTotal[i][0]])
 #f.write ("," + str ()
 

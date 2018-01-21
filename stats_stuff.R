@@ -1,3 +1,4 @@
+#options(max.print=1000000)
 
 create_data <- function(file_path){
   referees <- read.csv(file_path)
@@ -16,9 +17,7 @@ make_linear_model <- function(data){
   else{
     referees <- data
   }
-  
-  
-  xnam <- paste("`" , colnames(referees[,1:108]), "`", sep="")
+  xnam <- paste("`X",1:77,"`", sep="")
   formula_str <- paste(lapply(xnam, function(x) paste(x,xnam, sep="*", collapse="+")), collapse = "+")
   plzwrk <- as.formula(paste("`Total.Fouls` ~", formula_str))
   
@@ -48,6 +47,47 @@ summary(predictions)
 mean(abs(referees$Total.Fouls - mean(referees$Total.Fouls)))
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Not Yash's
+lm_mod_hf<-make_linear_model()
+summary(lm_mod_hf)
+
+make_linear_model2 <- function(){
+  xnam <- paste("`X",1:77,"`", sep="")
+  formula_str <- paste(lapply(xnam, function(x) paste(x,xnam, sep="*", collapse="+")), collapse = "+")
+  plzwrk <- as.formula(paste("`Away.Team.Fouls` ~", formula_str))
+  plzwrk
+  
+  linear_mod <- lm(data=referees,formula=plzwrk)
+  return(linear_mod)
+}
+lm_mod_af<-make_linear_model2()
+summary(lm_mod_af)
+
+make_linear_model3<- function(){
+  xnam <- paste("`X",1:77,"`", sep="")
+  formula_str <- paste(lapply(xnam, function(x) paste(x,xnam, sep="*", collapse="+")), collapse = "+")
+  plzwrk <- as.formula(paste("`Total.Fouls` ~", formula_str))
+  plzwrk
+  
+  linear_mod <- lm(data=referees,formula=plzwrk)
+  return(linear_mod)
+}
+lm_mod_tf<-make_linear_model3()
+summary(lm_mod_tf)
+anova(lm_mod_tf)
 
 library(ggplot2)
 ggplot(bias,aes(y = bias,x = seasons)) + geom_point() + 
