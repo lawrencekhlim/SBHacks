@@ -59,12 +59,14 @@ def prhomeltaway(x):
 ncp = 0
 # num incorrect predictions
 nip = 0
-
+predbias =0
     
 for line in data:
+    if(prhomeltaway([int(ref) for ref in line[1:len(prefb)+1]])>=.9):
+        predbias+=1
     if ("1" if prhomeltaway([int(ref) for ref in line[1:len(prefb)+1]])>=.5 else "0") == (line[-1]):
         ncp+=1
     else:
         nip+=1
-print(ncp,nip)
+print(ncp,nip,predbias/(ncp+nip))
     

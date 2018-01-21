@@ -275,6 +275,7 @@ lapply(l, function(div){
   })
 wtf <- read_csv("techfouls2015-7.csv",col_names = FALSE)
 colnames(wtf)<-c("Ref","TF","Games.Refd","Weighted.TF","Teams")
+
 lapply(l, function(div){
-  ggplot(wtf[wtf$Teams %in% div,], aes(x=Ref,y=Weighted.TF,fill=Teams)) +  geom_col()+theme(axis.text.x = element_text(angle=90))+labs(x="Referees",y="weighted technical fouls",title=div[1])
+  ggplot(wtf[wtf$Teams %in% div,], aes(x=reorder(Ref,-Weighted.TF),y=Weighted.TF,fill=Teams)) +  geom_col()+theme(axis.text.x = element_text(angle=90))+labs(x="Referees",y="average technical fouls",title=div[1])
 })
