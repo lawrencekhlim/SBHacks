@@ -14,6 +14,25 @@ matrixA = []
 vectorB = []
 vectorC = []
 
+def updateOfficialsFouls(officials):
+    for official in officials:
+        if official in officialtohomefouls:
+            officialtohomefouls[official].append (homefouls)
+        else:
+            officialtohomefouls[official] = [homefouls]
+
+        if official in officialtoawayfouls:
+            officialtoawayfouls[official].append (awayfouls)
+        else:
+            officialtoawayfouls[official] = [awayfouls]
+
+def getHomeFoulAverage():
+    return (float) (homesum)/666
+
+def getAwayFoulAverage():
+    return (float) (awaysum)/666
+
+
 for i in range (1, 668):
 
     path = "data/game{:03d}.json".format(i)
@@ -30,59 +49,35 @@ for i in range (1, 668):
     officials = []
     for i in range (0, 3):
         officials.append(int(json_dict[u'g'][u'offs'][u'off'][i][u'num']))
-    #print officials
 
     homefouls = int(json_dict[u'g'][u'hls'][u'tstsg'][u'pf'])
     homesum += homefouls
-    #print homefouls
-    
+
     awayfouls = int(json_dict[u'g'][u'vls'][u'tstsg'][u'pf'])
     awaysum += awayfouls
-    #   print awayfouls
 
+    # for the matrix
     row = [0] * 78
-
     for i in range (0, 3):
         row[officials[i]] = 1
-
     matrixA.append(row)
     vectorB.append([homefouls])
     vectorC.append([awayfouls])
 
-vectorX = linalg.lstsq(matrixA,vectorB)
+    #update the dicts with the referees' fouls for the game
+    updateOfficialsFouls(officials)
 
-print vectorX
-f = open ("Referees.csv", "w")
-csvwriter = csv.writer (f)
-csvwriter.writerow([i for i in range(78)] + ["Home Team Fouls", "Away Team Fouls"])
-for i in range (len (matrixA)):
-    csvwriter.writerow (matrixA[i]+ [vectorB[i][0], vectorC[i][0]])
-#f.write ("," + str () )
-
-
-f = open ("fouls.csv", "w")
-for i in range (len(vectorX)):
-    f.write (str(i) + ","+str(vectorX[i])+"\n")
-"""
-    for official in officials:
-        if official in officialtohomefouls:
-            officialtohomefouls[official].append (homefouls)
-        else:
-            officialtohomefouls[official] = [homefouls]
-
-        if official in officialtoawayfouls:
-            officialtoawayfouls[official].append (awayfouls)
-        else:
-            officialtoawayfouls[official] = [awayfouls]
-
-averagehome = (float) (homesum)/666
-averageaway = (float) (awaysum)/666
+# Find average of fouls for home and array
+averagehome = getHomeFoulAverage()
+averageaway = getAwayFoulAverage()
 
 averagenumhomefouls = {}
 averagenumawayfouls = {}
 variancehomefouls = {}
 varianceawayfouls = {}
 averagebias = {}
+
+# Calculate each ref's average fouls they call at home
 for key, value in officialtohomefouls.items():
     averagenumhomefouls[key] = (float)(sum(value))/len(value)
     averagebias [key] = -1 * averagenumhomefouls[key]
@@ -91,6 +86,7 @@ for key, value in officialtohomefouls.items():
         variancehomefouls[key]+= (averagenumhomefouls[key] - foul)**2
     variancehomefouls[key] /= len (officialtohomefouls[key])
 
+# Calculate each ref's average fouls they call away
 for key, value in officialtoawayfouls.items():
     averagenumawayfouls[key] = (float)(sum(value))/len(value)
     averagebias [key] +=averagenumawayfouls[key]
@@ -98,6 +94,8 @@ for key, value in officialtoawayfouls.items():
     for foul in officialtoawayfouls[key]:
         varianceawayfouls[key]+= (averagenumawayfouls[key] - foul)**2
     varianceawayfouls[key] /= len (officialtoawayfouls[key])
+
+
 print "AWAY TEAM"
 print averagenumawayfouls
 print max (averagenumawayfouls.values())
@@ -117,12 +115,13 @@ print sorted(averagebias, key= lambda x: averagebias[x])
 print variancehomefouls
 
 
+vectorX = linalg.lstsq(matrixA,vectorB)
 
-
-
-f = open ("fouls.csv", "w")
-for key, value in variancehomefouls.items():
-    f.write (str(key) + ","+str(value)+"\n")
-
-"""
+print vectorX
+f = open ("Referees.csv", "w")
+csvwriter = csv.writer (f)
+csvwriter.writerow([i for i in range(78)] + ["Home Team Fouls", "Away Team Fouls"])
+for i in range (len (matrixA)):
+    csvwriter.writerow (matrixA[i]+ [vectorB[i][0], vectorC[i][0]])
+#f.write ("," + str ()
 
