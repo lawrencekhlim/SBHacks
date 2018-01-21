@@ -141,8 +141,12 @@ mean(abs(referees$Total.Fouls - mean(referees$Total.Fouls)))
 lapply(colnames(ref2016)[1:78], function(x) sum(ref2016[x]))
 
 ref_train<-read.csv('Referees-Training.csv')
-ref2016<-ref2016[, order(colSums(ref2016))]
-write.csv(ref2016, "Referees2016.csv", row.names = F)
+ref_train[1:78]<-ref_train[, order(colSums(ref_train[1:78]))]
+write.csv(ref_train, "Referees-Training.csv", row.names = F)
+
+ref_val<-read.csv('Referees-Validation.csv')
+ref_val[1:78]<-ref_val[, order(colSums(ref_train[1:78]))]
+write.csv(ref_val, "Referees-Validation.csv", row.names = F)
 
 
 
