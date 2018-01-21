@@ -63,17 +63,25 @@ nip = 0
 predbias =0
 minp = 0.0000000001
 maxp = 0.9999999999
+tp = 0
+tn = 0
 while maxp-minp>.00000000001:
     ncp = 0
     nip = 0
     predbias =0
     tipping_pt = (maxp+minp)/2
+    tp = 0
+    tn = 0
     for line in data:
         if(prhomeltaway([int(ref) for ref in line[skip:len(prefb)+1]])>=tipping_pt):
             predbias+=1
             
         if ("1" if prhomeltaway([int(ref) for ref in line[skip:len(prefb)+1]])>=tipping_pt else "0") == (line[-1]):
             ncp+=1
+            if(line[-1]=="1"):
+                tp+=1
+            else:
+                tn+=1
         else:
             nip+=1
     if predbias < nb:
@@ -89,6 +97,10 @@ print("correct predictions",ncp)
 print("incorrect predictions",nip)
 print("accuracy",ncp/(ncp+nip))
 print("predicted games percent bias:",predbias/(ncp+nip))
+print("true positives:",tp,"percent",tp/(ncp+nip))
+print("false positives:",predbias-tp,"percent",(predbias-tp)/(ncp+nip))
+print("true negatives:",tn,"percent",tn/(ncp+nip))
+print("false negatives:",((ncp+nip)-predbias)-tn,"percent",(((ncp+nip)-predbias)-tn)/(ncp+nip))
 print("\n")
 
 ncp = 0
@@ -96,6 +108,8 @@ nip = 0
 nb = 0
 nnb = 0
 predbias = 0
+tp = 0
+tn = 0
 vdata = [line.split(',') for line in open("Referees-Validation.csv").read().split('\n')]
 vdata = vdata[1:-1]
 for line in vdata:
@@ -109,6 +123,10 @@ for line in vdata:
     
     if ("1" if prhomeltaway([int(ref) for ref in line[skip:len(prefb)+1]])>=tipping_pt else "0") == (line[-1]):
         ncp+=1
+        if(line[-1]=="1"):
+            tp+=1
+        else:
+            tn+=1
     else:
         nip+=1
 print("validation results")
@@ -117,3 +135,7 @@ print("correct predictions",ncp)
 print("incorrect predictions",nip)
 print("accuracy",ncp/(ncp+nip))
 print("predicted games percent bias:",predbias/(ncp+nip))
+print("true positives:",tp,"percent",tp/(ncp+nip))
+print("false positives:",predbias-tp,"percent",(predbias-tp)/(ncp+nip))
+print("true negatives:",tn,"percent",tn/(ncp+nip))
+print("false negatives:",((ncp+nip)-predbias)-tn,"percent",(((ncp+nip)-predbias)-tn)/(ncp+nip))
