@@ -57,15 +57,33 @@ average_foul_plot <- average_foul_plot +
 average_foul_plot
 
 
-
-
-
-png("img/AverageFouls.png", width=1000, height=400)
+png("img/AverageFouls.png", width=800, height=400)
 plot(average_foul_plot)
 dev.off()
 
 
-levels(fouls$Team) <- reorder(fouls$Team, -fouls$Fouls)
+
+
+
+individual_fouls <- fouls[,c(1,4,5)]
+individual_fouls <- melt(individual_fouls)
+
+home_color <- "black"
+away_color <- "red"
+
+individual_foul_plot <- ggplot(data = individual_fouls,aes(x=reorder(Referee, -value), y=value, color=variable)) +
+  geom_point()+
+  scale_color_manual(breaks = c("Home", "Away"), values = c(home_color, away_color))+
+  labs(x="Referee", y="Fouls Called", title="Average Foul Calls While Referee Active", color="Team")+
+  theme(axis.text.x = element_text(angle=90))
+
+individual_foul_plot
+
+
+png("img/IndividualFouls.png", width=800, height=400)
+plot(individual_foul_plot)
+dev.off()
+
 
 
 
