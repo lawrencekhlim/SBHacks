@@ -5,6 +5,7 @@ from scipy import linalg
 import csv
 import copy
 
+<<<<<<< HEAD
 officialsNames = {
     3:"Nick Buchert",
     4:"Sean Wright",
@@ -111,6 +112,8 @@ teams = {
 "Jazz": 0,
 "Wizards": 0
 }
+=======
+>>>>>>> 2f5042dec5ba4c7e35658500aa2a84949e46e7cc
 #key = officalnum, value = dict with key being team name and val being number of techs
 officialtechs = {}
 
@@ -139,17 +142,26 @@ for i in range (1, 668):
 
     for official in officials:
         if official not in officialtechs:
-            officialtechs[official] = copy.deepcopy(teams)
-        officialtechs[official][hometeamname] += hometechfouls
-        officialtechs[official][awayteamname] += awaytechfouls
+            officialtechs[official] = {}
+            officialtechs[official][hometeamname] = hometechfouls
+        else:
+            if hometeamname not in officialtechs[official]:
+                officialtechs[official][hometeamname] = hometechfouls
+            else:
+                officialtechs[official][hometeamname] += hometechfouls
+
+        if official not in officialtechs:
+            officialtechs[official] = {}
+            officialtechs[official][awayteamname] = awaytechfouls
+        else:
+            if awayteamname not in officialtechs[official]:
+                officialtechs[official][awayteamname] = awaytechfouls
+            else:
+                officialtechs[official][awayteamname] += awaytechfouls
 
 f = open("techfouls2017.csv", "w")
 for officialnum in sorted(officialtechs.keys(), key = lambda x: x):
-    line = ""
-    line += str(officialnum) + ","
     for team in sorted(officialtechs[officialnum], key = lambda x: x):
-        line += str(officialtechs[officialnum][team]) + ","
-
-    f.write(line[:-1] + "\n")
+        f.write(str(officialnum) + "," + str(officialtechs[officialnum][team]) + "," + str(team) + "\n")
 f.close()
 
