@@ -72,7 +72,7 @@ vectorC = []
 
 for i in range (1, 668):
 
-    path = "data/Yr17game{:03d}.json".format(i)
+    path = "data/Yr16game{:03d}.json".format(i)
     print path
     json_file = open(path, "r")
     json_text = json_file.read()
@@ -85,7 +85,10 @@ for i in range (1, 668):
 
     officials = []
     for i in range (0, 3):
-        officials.append(int(json_dict[u'g'][u'offs'][u'off'][i][u'num']))
+        try:
+            officials.append(int(json_dict[u'g'][u'offs'][u'off'][i][u'num']))
+        except:
+            print ('FAILED GAME ' + str(i))
 
     homefouls = int(json_dict[u'g'][u'hls'][u'tstsg'][u'pf'])
     homesum += homefouls
@@ -104,8 +107,9 @@ for i in range (1, 668):
 
     # for the matrix
     row = [0] * 78
-    for i in range (0, 3):
-        row[officials[i]] = 1
+    for off in officials:
+        row[off] = 1
+    
     matrixTotal.append (row + teams)
     matrixA.append(row)
     vectorB.append([homefouls])
@@ -163,12 +167,16 @@ print variancehomefouls
 
 
 vectorX = linalg.lstsq(matrixTotal,vectorB)
+arr = [i for i in range(78)] +[key for key in sorted(teamnameID, key= lambda x: teamnameID[x])]
+for i in range (len (vectorX[3])):
+    print (str(arr[i]) + ": " + str(vectorX [3][i]) )
 
-print vectorX
-f = open ("Referees.csv", "w")
+
+f = open ("Referees2016.csv", "w")
 csvwriter = csv.writer (f)
-csvwriter.writerow([i for i in range(78)] +[key for key in sorted(teamnameID, key= lambda x: teamnameID[x])] + ["Home Team Fouls", "Away Team Fouls"])
-for i in range (len (matrixA)):
-    csvwriter.writerow (matrixA[i] +matrixD[i] + [vectorB[i][0], vectorC[i][0]])
+
+csvwriter.writerow(arr + ["Home Team Fouls", "Away Team Fouls"])
+for i in range (len (matrixTotal)):
+    csvwriter.writerow (matrixTotal[i] + [vectorB[i][0], vectorC[i][0]])
 #f.write ("," + str ()
 

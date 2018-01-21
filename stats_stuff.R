@@ -1,3 +1,44 @@
+
+make_linear_model <- function(){
+  referees <- read.csv("Referees.csv")
+  referees[,1:78] <- lapply(referees[, 1:78], function(x) as.logical(x))
+  referees$Total.Fouls <- referees$Home.Team.Fouls + referees$Away.Team.Fouls
+  
+  
+  xnam <- paste("`X",1:77,"`", sep="")
+  formula_str <- paste(lapply(xnam, function(x) paste(x,xnam, sep="*", collapse="+")), collapse = "+")
+  plzwrk <- as.formula(paste("`Home.Team.Fouls` ~", formula_str))
+  plzwrk
+  
+  linear_mod <- lm(data=referees,formula=plzwrk)
+  return(linear_mod)
+}
+summary(make_linear_model())
+
+
+
+library(ggplot2)
+ggplot(bias,aes(y = bias,x = seasons)) + geom_point() + 
+  geom_smooth(method="lm",formula = y~x, se=F) +
+  labs(x = "season", y = "bias",title="Scatterplot: Seasons for ref vs. Bias")
+mod1 <- lm(players$Points~players$Assists+players$Rebounds+players$Assists+players$Blocks)
+summary(mod1)
+ggplot(bias,aes(y = fouls_home,x = seasons)) + geom_point() + 
+  geom_smooth(method="lm",formula = y~x, se=F) +
+  labs(title="Scatterplot:")
+ggplot(bias,aes(x = seasons,y = fouls_away)) + geom_point() + 
+  geom_smooth(method="lm",formula = y~x, se=F) +
+  labs(title="Scatterplot:")
+
+summary(lm(bias$fouls_away~bias$bias))
+
+
+mod1 <- lm(players$Points~players$Assists+players$Won+players$FTA+players$FTM+players$Seconds_Played)
+summary(mod1)
+aov(mod1)
+anova(mod1)
+
+#referees[] <- lapply(referees, function(x) as.logical(x))
 mod <- lm(bias$bias~bias$seasons)
 summary(mod)
 library(ggplot2)
