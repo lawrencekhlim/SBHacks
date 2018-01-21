@@ -29,93 +29,90 @@ make_linear_model <- function(data){
 }
 
 
+
+
 fouls <- read.csv('normalizedHomeFouls.csv')
-
+  
 averages <- fouls[1,1:5]
-fouls <- fouls[2:nrow(fouls),1:5]
-
-colnames(fouls) <- c('Referee', 'Average.Home', 'Average.Away', 'Individual.Home', 'Individual.Away')
+fouls <- fouls[2:nrow(fouls),]
+  
+colnames(fouls) <- c('Referee', 'Average.Home', 'Average.Away', 'Individual.Home', 'Individual.Away', 'Average.Differences')
 #  fouls <- fouls[fouls$Fouls_Called > 1,]
-
-average_fouls <- fouls[,1:3]
-average_fouls <- melt(average_fouls)
+  
 
 
-home_color <- "black"
-away_color <- "red"
-
-average_foul_plot <- ggplot(data = average_fouls,aes(x=reorder(Referee, -value), y=value, color=variable)) +
-  geom_point()+
-  scale_color_manual(breaks = c("Home", "Away"), values = c(home_color, away_color))+
-  labs(x="Referee", y="Fouls Called", title="Average Foul Calls While Referee Active", color="Team")+
-  theme(axis.text.x = element_text(angle=90))
-
-average_foul_plot <- average_foul_plot +
-  annotate("segment", y=averages[[2]], yend=averages[[2]],x='Zach Zarba', xend='Ron Garretson', color=home_color)+ #home average
-  annotate("text", x='Curtis Blair', y=averages[[2]]-0.3, label="Average Foul Calls for Home",color=home_color, fontface=2)+
-  annotate("segment", y=averages[[3]], yend=averages[[3]],x='Zach Zarba', xend='Ron Garretson', color=away_color)+ #away average
-  annotate("text", x='Dedric Taylor', y=averages[[3]]+0.3, label="Average Foul Calls for Away", color=away_color, fontface=2)
-
-average_foul_plot
-
-
-png("img/AverageFouls.png", width=800, height=400)
-plot(average_foul_plot)
-dev.off()
-
-
-
+make_foul_plot <- function(fouls, title_text, colors){
+  if(missing(colors)){
+    home_color <- "black"
+    away_color <- "red"
+  }
+  else{
+    home_color <- colors[1]
+    away_color <- colors[2]
+  }
+  
+  
+  plot_data <- melt(fouls)
+  team_type <- as.character(unique(plot_data$variable))
+  
+  foul_plot <- ggplot(data = plot_data,aes(x=reorder(Referee, -value), y=value, color=variable)) +
+    geom_point()+
+    scale_color_manual(breaks = c(team_type[1], team_type[2]), values = c(home_color, away_color))+
+    labs(x="Referee", y="Fouls Called", title=title_text, color="Type")+
+    theme(axis.text.x = element_text(angle=90))
+  
+  return(foul_plot)
+}
 
 
-individual_fouls <- fouls[,c(1,4,5)]
-individual_fouls <- melt(individual_fouls)
+make_average_foul_plot <- function(){
+  
+  average_fouls <- fouls[,1:3]
+  average_foul_plot <- make_foul_plot(average_fouls, "Average Foul Calls While Referee Active")
+  
+  average_foul_plot <- average_foul_plot +
+    annotate("segment", y=averages[[2]], yend=averages[[2]],x='Zach Zarba', xend='Ron Garretson', color=home_color)+ #home average
+    annotate("text", x='Curtis Blair', y=averages[[2]]-0.3, label="Average Foul Calls for Home",color=home_color, fontface=2)+
+    annotate("segment", y=averages[[3]], yend=averages[[3]],x='Zach Zarba', xend='Ron Garretson', color=away_color)+ #away average
+    annotate("text", x='Dedric Taylor', y=averages[[3]]+0.3, label="Average Foul Calls for Away", color=away_color, fontface=2)
+  
+  return(average_foul_plot)
+}
 
-home_color <- "black"
-away_color <- "red"
+make_individual_foul_plot <- function(){
+  
+  individual_fouls <- fouls[,c(1,4,5)]
+  individual_foul_plot <- make_foul_plot(individual_fouls, "Fouls Called Per Referee")
+  
+  individual_foul_plot <- individual_foul_plot +
+    annotate("segment", y=averages[[4]], yend=averages[[4]],x='Zach Zarba', xend='Ron Garretson', color=home_color)+ #home average
+    annotate("text", x='Rodney Mott', y=averages[[4]]-0.3, label="Average Foul Calls for Home",color=home_color, fontface=2)+
+    annotate("segment", y=averages[[5]], yend=averages[[5]],x='Zach Zarba', xend='Ron Garretson', color=away_color)+ #away average
+    annotate("text", x='Brian Forte', y=averages[[5]]+0.6, label="Average Foul Calls for Away", color=away_color, fontface=2)+
+    theme(legend.position = 'none')
+  
+  return(individual_foul_plot)
+}
 
-individual_foul_plot <- ggplot(data = individual_fouls,aes(x=reorder(Referee, -value), y=value, color=variable)) +
-  geom_point()+
-  scale_color_manual(breaks = c("Home", "Away"), values = c(home_color, away_color))+
-  labs(x="Referee", y="Fouls Called", title="Average Foul Calls While Referee Active", color="Team")+
-  theme(axis.text.x = element_text(angle=90))
-
-individual_foul_plot <- individual_foul_plot +
-  annotate("segment", y=averages[[4]], yend=averages[[4]],x='Zach Zarba', xend='Ron Garretson', color=home_color)+ #home average
-  annotate("text", x='Rodney Mott', y=averages[[4]]-0.3, label="Average Foul Calls for Home",color=home_color, fontface=2)+
-  annotate("segment", y=averages[[5]], yend=averages[[5]],x='Zach Zarba', xend='Ron Garretson', color=away_color)+ #away average
-  annotate("text", x='Brian Forte', y=averages[[5]]+0.6, label="Average Foul Calls for Away", color=away_color, fontface=2)
-
-individual_foul_plot
-
-
-png("img/IndividualFouls.png", width=800, height=400)
-plot(individual_foul_plot)
-dev.off()
-
-
-
-
-
-fouls <- melt(fouls)
-head(fouls[2:nrow(fouls),1:3])
-
-#reorder(Referee, -Home.Fouls)
-
-foul_plot <- ggplot(data = fouls,aes(x=reorder(Referee, -value), y=value, fill=variable)) +
-  geom_col(position="dodge")+
-  scale_fill_manual(breaks = c("Home", "Away"), values = c("grey40", "red4"))+
-  labs(x="Referee", y="Fouls Called", title="How Many Fouls Each Referee Calls in the NBA", fill="Team")+
-  theme(axis.text.x = element_text(angle=90))
-foul_plot
+plot_to_image <- function(file_path, desired_plot){
+  png(file_path, width=800, height=400)
+  plot(desired_plot)
+  dev.off()
+}
+plot_to_image("img/FoulDifferences.png", make_difference_plots())
+plot_to_image("img/AverageFouls.png", make_average_foul_plot())
+plot_to_image("img/IndividualFouls.png", make_individual_foul_plot())
 
 
-
-
-
-
-
-
-
+make_difference_plots <- function(){
+  fouls$Average.Differences <- fouls$Average.Home-fouls$Average.Away
+  fouls$Individual.Differences <- fouls$Individual.Home-fouls$Individual.Away
+  differences <- fouls[,c(1,6,7)]
+  
+  difference_plot <- make_foul_plot(differences, "Difference Between Home and Away Fouls", c("orangered2", "blue"))
+  
+  return(difference_plot)
+}
 
 
 
