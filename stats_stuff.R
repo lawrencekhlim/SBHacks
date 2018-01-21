@@ -141,12 +141,12 @@ mean(abs(referees$Total.Fouls - mean(referees$Total.Fouls)))
 lapply(colnames(ref2016)[1:78], function(x) sum(ref2016[x]))
 
 ref_train<-read.csv('Referees-Training.csv')
-ref2016<-ref2016[, order(colSums(ref2016))]
-write.csv(ref2016, "Referees2016.csv", row.names = F)
+ref_train[1:78]<-ref_train[, order(colSums(ref_train[1:78]))]
+write.csv(ref_train, "Referees-Training.csv", row.names = F)
 
-
-
-
+ref_val<-read.csv('Referees-Validation.csv')
+ref_val[1:78]<-ref_val[, order(colSums(ref_train[1:78]))]
+write.csv(ref_val, "Referees-Validation.csv", row.names = F)
 
 
 
@@ -276,3 +276,10 @@ colnames(wtf)<-c("Ref","TF","Games.Refd","Weighted.TF","Teams")
 lapply(l, function(div){
   ggplot(wtf[wtf$Teams %in% div,], aes(x=reorder(Ref,-Weighted.TF),y=Weighted.TF,fill=Teams)) +  geom_col()+theme(axis.text.x = element_text(angle=90))+labs(x="Referees",y="average technical fouls",title=paste("Average Number of Technical Fouls assesed by each referee to the ",div[1]," Division",sep=""))
 })
+
+tfr <- read_csv("techfoulratios.csv",col_names = TRUE)
+ggplot(tfr,aes(x=reorder(Team,got.cucked),y=got.cucked,fill=Team))+
+  geom_col()+
+  scale_fill_manual(breaks = tfr$Team, values = tfr$color)+
+  theme(axis.text.x = element_text(angle=90))+
+  labs(x="Team",y="Num referees assessed techs/games > .3",title=paste("Percentage of Referees More Likely to Call Technical Fouls",sep=""))
