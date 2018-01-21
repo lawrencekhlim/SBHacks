@@ -282,4 +282,4 @@ ggplot(tfr,aes(x=reorder(Team,got.cucked),y=got.cucked,fill=Team))+
   geom_col()+
   scale_fill_manual(breaks = tfr$Team, values = tfr$color)+
   theme(axis.text.x = element_text(angle=90))+
-  labs(x="Team",y="Num referees assessed techs/games > .3",title=paste("How Often Teams Get a Significant Number of Fouls",sep=""))
+  labs(x="Team",y="Num referees assessed techs/games > .3",title=paste("Percentage of Referees More Likely to Call Technical Fouls",sep=""))
