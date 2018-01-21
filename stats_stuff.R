@@ -51,8 +51,10 @@ average_foul_plot <- ggplot(data = average_fouls,aes(x=reorder(Referee, -value),
   theme(axis.text.x = element_text(angle=90))
 
 average_foul_plot <- average_foul_plot +
-  annotate("segment", y=averages[1], yend=averages[1],x=, color=home_color) #home average
-  #geom_hline(yintercept = averages[2], color=away_color) #away average
+  annotate("segment", y=averages[[2]], yend=averages[[2]],x='Zach Zarba', xend='Ron Garretson', color=home_color)+ #home average
+  annotate("text", x='Curtis Blair', y=averages[[2]]-0.3, label="Average Foul Calls for Home",color=home_color, fontface=2)+
+  annotate("segment", y=averages[[3]], yend=averages[[3]],x='Zach Zarba', xend='Ron Garretson', color=away_color)+ #away average
+  annotate("text", x='Dedric Taylor', y=averages[[3]]+0.3, label="Average Foul Calls for Away", color=away_color, fontface=2)
 
 average_foul_plot
 
@@ -76,6 +78,12 @@ individual_foul_plot <- ggplot(data = individual_fouls,aes(x=reorder(Referee, -v
   scale_color_manual(breaks = c("Home", "Away"), values = c(home_color, away_color))+
   labs(x="Referee", y="Fouls Called", title="Average Foul Calls While Referee Active", color="Team")+
   theme(axis.text.x = element_text(angle=90))
+
+individual_foul_plot <- individual_foul_plot +
+  annotate("segment", y=averages[[4]], yend=averages[[4]],x='Zach Zarba', xend='Ron Garretson', color=home_color)+ #home average
+  annotate("text", x='Rodney Mott', y=averages[[4]]-0.3, label="Average Foul Calls for Home",color=home_color, fontface=2)+
+  annotate("segment", y=averages[[5]], yend=averages[[5]],x='Zach Zarba', xend='Ron Garretson', color=away_color)+ #away average
+  annotate("text", x='Brian Forte', y=averages[[5]]+0.6, label="Average Foul Calls for Away", color=away_color, fontface=2)
 
 individual_foul_plot
 
