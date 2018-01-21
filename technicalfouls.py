@@ -5,7 +5,7 @@ from scipy import linalg
 import csv
 import copy
 
-<<<<<<< HEAD
+
 officialsNames = {
     3:"Nick Buchert",
     4:"Sean Wright",
@@ -112,13 +112,12 @@ teams = {
 "Jazz": 0,
 "Wizards": 0
 }
-=======
->>>>>>> 2f5042dec5ba4c7e35658500aa2a84949e46e7cc
+
 #key = officalnum, value = dict with key being team name and val being number of techs
 officialtechs = {}
 
 for i in range (1, 668):
-    path = "data/Yr17game{:03d}.json".format(i)
+    path = "data/Yr15game{:03d}.json".format(i)
     print(path)
     json_file = open(path, "r")
     json_text = json_file.read()
@@ -159,9 +158,9 @@ for i in range (1, 668):
             else:
                 officialtechs[official][awayteamname] += awaytechfouls
 
-f = open("techfouls2017.csv", "w")
+f = open("techfouls2015.csv", "w")
 for officialnum in sorted(officialtechs.keys(), key = lambda x: x):
     for team in sorted(officialtechs[officialnum], key = lambda x: x):
-        f.write(str(officialnum) + "," + str(officialtechs[officialnum][team]) + "," + str(team) + "\n")
+        f.write(str(officialsNames[officialnum] if officialnum in officialsNames else officialnum) + "," + str(officialtechs[officialnum][team]) + "," + str(team) + "\n")
 f.close()
 
