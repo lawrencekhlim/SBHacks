@@ -5,7 +5,7 @@ library('reshape2')
 
 create_data <- function(file_path){
   referees <- read.csv(file_path)
-  referees[,1:108] <- lapply(referees[, 1:108], function(x) as.logical(x))
+#  referees[,1:108] <- lapply(referees[, 1:108], function(x) as.logical(x))
   referees$Total.Fouls <- referees$Home.Team.Fouls + referees$Away.Team.Fouls
   referees$Bias <- referees$Home.Team.Fouls < referees$Away.Team.Fouls
   
@@ -138,11 +138,11 @@ summary(predictions)
 
 mean(abs(referees$Total.Fouls - mean(referees$Total.Fouls)))
 
+lapply(colnames(ref2016)[1:78], function(x) sum(ref2016[x]))
 
-
-
-
-
+ref_train<-read.csv('Referees-Training.csv')
+ref2016<-ref2016[, order(colSums(ref2016))]
+write.csv(ref2016, "Referees2016.csv", row.names = F)
 
 
 
