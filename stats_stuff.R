@@ -29,26 +29,58 @@ make_linear_model <- function(data){
 }
 
 
-make_bias_plots <- function(){
-  fouls <- read.csv('normalizedHomeFouls.csv')
-  colnames(fouls) <- c('Referee', 'Home', 'Away', 'Home-Away')
+fouls <- read.csv('normalizedHomeFouls.csv')
+
+averages <- fouls[1,1:5]
+fouls <- fouls[2:nrow(fouls),1:5]
+
+colnames(fouls) <- c('Referee', 'Average.Home', 'Average.Away', 'Individual.Home', 'Individual.Away')
 #  fouls <- fouls[fouls$Fouls_Called > 1,]
-  fouls <- fouls[,1:3]
-  
-  fouls <- melt(fouls)
-  
-  
-  #reorder(Referee, -Home.Fouls)
-  
-  foul_plot <- ggplot(data = fouls,aes(x=reorder(Referee, -value), y=value, fill=variable)) +
-    geom_col(position="dodge")+
-    scale_fill_manual(breaks = c("Home", "Away"), values = c("grey30", "sienna1"))+
-    labs(x="Referee", y="Fouls Called", title="How Many Fouls Each Referee Calls in the NBA", fill="Team")+
-    theme(axis.text.x = element_text(angle=90))
-  foul_plot
-  return(foul_plot)
-}
-make_bias_plots()
+
+average_fouls <- fouls[,1:3]
+average_fouls <- melt(average_fouls)
+
+average_foul_plot <- ggplot(data = average_fouls,aes(x=reorder(Referee, -value), y=value, fill=variable)) +
+  geom_col(width=0.6, position = position_dodge(width = 0.7))+
+  scale_fill_manual(breaks = c("Home", "Away"), values = c("grey50", "tomato3"))+
+  labs(x="Referee", y="Fouls Called", title="Average Foul Calls Per Referee", fill="Team")+
+  theme(axis.text.x = element_text(angle=90))
+average_foul_plot
+
+
+png("img/AverageFouls.png", width=1000, height=400)
+plot(average_foul_plot)
+dev.off()
+
+
+levels(fouls$Team) <- reorder(fouls$Team, -fouls$Fouls)
+
+
+
+
+fouls <- melt(fouls)
+head(fouls[2:nrow(fouls),1:3])
+
+#reorder(Referee, -Home.Fouls)
+
+foul_plot <- ggplot(data = fouls,aes(x=reorder(Referee, -value), y=value, fill=variable)) +
+  geom_col(position="dodge")+
+  scale_fill_manual(breaks = c("Home", "Away"), values = c("grey40", "red4"))+
+  labs(x="Referee", y="Fouls Called", title="How Many Fouls Each Referee Calls in the NBA", fill="Team")+
+  theme(axis.text.x = element_text(angle=90))
+foul_plot
+
+
+
+
+
+
+
+
+
+
+
+
 
 #ref2015 <- create_data('Referees2015.csv')
 #ref2015$isTrain <- runif(nrow(ref2015)) < 0.75
