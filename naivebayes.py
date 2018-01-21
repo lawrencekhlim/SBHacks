@@ -1,4 +1,4 @@
-data = [line.split(',') for line in open("referees2015-2.csv").read().split('\n')]
+data = [line.split(',') for line in open("Referees-Training.csv").read().split('\n')]
 heads = data[0]
 data = data[1:-1]
 
@@ -10,9 +10,10 @@ nb=0
 # num not bias
 nnb=0
 #P(ref[i]=1|bias)
-prefb = [0]*78
+skip = 78
+prefb = [0]*(len(heads)-(4+skip))
 #P(ref[i]=1|not bias)
-prefnb = [0]*78
+prefnb = [0]*(len(prefb))
 
 for i in range(len(data)):
     line = data[i]
@@ -22,7 +23,7 @@ for i in range(len(data)):
     elif line[-1] == "1":
         nb+=1
     for ref in range(len(prefb)):
-        if line[ref+1] == "1":
+        if line[ref+skip] == "1":
             if line[-1] == "0":
                 prefnb[ref]+=1
             elif line[-1] == "1":
@@ -68,10 +69,10 @@ while maxp-minp>.001:
     predbias =0
     tipping_pt = (maxp+minp)/2
     for line in data:
-        if(prhomeltaway([int(ref) for ref in line[1:len(prefb)+1]])>=tipping_pt):
+        if(prhomeltaway([int(ref) for ref in line[skip:len(prefb)+1]])>=tipping_pt):
             predbias+=1
             
-        if ("1" if prhomeltaway([int(ref) for ref in line[1:len(prefb)+1]])>=tipping_pt else "0") == (line[-1]):
+        if ("1" if prhomeltaway([int(ref) for ref in line[skip:len(prefb)+1]])>=tipping_pt else "0") == (line[-1]):
             ncp+=1
         else:
             nip+=1
@@ -79,6 +80,40 @@ while maxp-minp>.001:
         maxp = tipping_pt
     else:
         minp = tipping_pt
-print("tipping pt:",(maxp+minp)/2)
-print(ncp,nip,ncp/(ncp+nip),predbias/(ncp+nip))
+tipping_pt = (maxp+minp)/2
+print("\n")
+print("tipping pt:",tipping_pt)
+print("total games percent bias:",(nb/(nb+nnb)))
+print("training results")
+print("correct predictions",ncp)
+print("incorrect predictions",nip)
+print("accuracy",ncp/(ncp+nip))
+print("predicted games percent bias:",predbias/(ncp+nip))
+print("\n")
+
+ncp = 0
+nip = 0
+nb = 0
+nnb = 0
+predbias = 0
+vdata = [line.split(',') for line in open("Referees-Validation.csv").read().split('\n')]
+vdata = vdata[1:-1]
+for line in vdata:
+    if(prhomeltaway([int(ref) for ref in line[skip:len(prefb)+1]])>=tipping_pt):
+        predbias+=1
     
+    if(line[-1]=="1"):
+        nb+=1
+    else:
+        nnb+=1
+    
+    if ("1" if prhomeltaway([int(ref) for ref in line[skip:len(prefb)+1]])>=tipping_pt else "0") == (line[-1]):
+        ncp+=1
+    else:
+        nip+=1
+print("validation results")
+print("total games percent bias:",(nb/(nb+nnb)))
+print("correct predictions",ncp)
+print("incorrect predictions",nip)
+print("accuracy",ncp/(ncp+nip))
+print("predicted games percent bias:",predbias/(ncp+nip))

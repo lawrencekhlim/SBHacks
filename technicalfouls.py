@@ -171,6 +171,7 @@ for j in range(5,8):
 f = open("techfouls2015-7.csv", "w")
 for officialnum in sorted(officialtechs.keys(), key = lambda x: x):
     for team in sorted(officialtechs[officialnum], key = lambda x: x):
-        f.write(str(officialsNames[officialnum] if officialnum in officialsNames else officialnum) + "," + str(officialtechs[officialnum][team]) + "," + str(officialteams[officialnum][team]) + "," + str(officialtechs[officialnum][team]/officialteams[officialnum][team]) + "," + str(team) + "\n")
+        if officialnum in officialsNames:
+            f.write(str(officialsNames[officialnum]) + "," + str(officialtechs[officialnum][team]) + "," + str(officialteams[officialnum][team]) + "," + str(officialtechs[officialnum][team]/officialteams[officialnum][team]) + "," + str(team) + "\n")
 f.close()
 
