@@ -25,9 +25,27 @@
     Notable Trends/Observations:
         <ul style="list-style-type:disc; font-size:20px; text-align:center; margin: 0 auto">
             <li>On average, home teams (listed in black) get called for about 19.69 fouls, while away teams (listed in red) get called for more fouls, at 20.89.</li>
-                <li>For a majority of the referees, home teams get an advantage because they are called for fewer fouls than the visiting team.</li>
+            <li>For a majority of the referees, home teams get an advantage because they are called for fewer fouls than the visiting team.</li>
             <li>However, this does not account for the fact that referees work in group of threes, so a referee working with another referee who makes many calls will also increase their foul calls in this chart.</li>
         </ul>
+    </div>
+    
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    
+    <img src="../img/FoulDifferences.png" style="height:500px;width:1000px; display:block; margin: 0 auto;"/>
+    <br>
+    <div align="center" style="font-size:25px;  width:1000px;  margin: 0 auto">
+    Notable Trends/Observations:
+    <ul style="list-style-type:disc; font-size:20px; text-align:center; margin: 0 auto">
+        <li>The graph measures bias by calculating <b>home team fouls - away team fouls</b> for each referee. </li>
+        <li>More positive numbers mean that the referee favors the away team over the home team, while more negative numbers mean that the referee favors the home team over the away team.</li>
+        <li>The blue points indicate individual bias using our previous model with individual contributions, while the red points indicate the average bias that the referee is involved in.</li>
+        <li>By our calculations, Scott Foster favors the away team the most of all referees, and Leroy Richardson favors the home team the most. If you are cheering for the home team, your team will be most favored by the referees on the right of the graph, like Leroy Richardson.</li>
+    </ul>
     </div>
     
     <br>
@@ -39,15 +57,15 @@
     <img src="../img/IndividualFouls.png" style="height:500px;width:1000px; display:block; margin: 0 auto;"/>
     <br>
     <div align="center" style="font-size:25px;  width:1000px;  margin: 0 auto">
-    Notable Trends/Observations:
-    <ul style="list-style-type:disc; font-size:20px; text-align:center; margin: 0 auto">
-        <li>From the previous graph, we adjusted for the fact that other referees make their own calls, which can increase the number of foul calls for the other referees on the court. We adjusted
-            this using least square approximation which led to an estimation of the number of foul calls an individual referee will make.</li>
-        <li>For instance, in the first Celtics@Cavaliers game, for referees Monty McCutchen, Michael Smith, and Brian Forte, the total number of foul calls they called on the visiting team was 24. Let the number of calls that Monty McCutchen made be x1, the number of calls that Michael Smith made be x2, and the number of calls that Brian Forte made be x3. Then the number of calls can be represented by x1 + x2 + x3 = 24. Taking this equation from every game in the season, we minimized the square error for each referee to get the number of calls that each referee makes.
+        Notable Trends/Observations:
+        <ul style="list-style-type:disc; font-size:20px; text-align:center; margin: 0 auto">
+            <li>From the previous graph, we adjusted for the fact that other referees make their own calls, which can increase the number of foul calls for the other referees on the court. We adjusted
+                this using least square approximation which led to an estimation of the number of foul calls an individual referee will make.</li>
+            <li>For instance, in the first Celtics@Cavaliers game, for referees Monty McCutchen, Michael Smith, and Brian Forte, the total number of foul calls they called on the visiting team was 24. Let the number of calls that Monty McCutchen made be x1, the number of calls that Michael Smith made be x2, and the number of calls that Brian Forte made be x3. Then the number of calls can be represented by x1 + x2 + x3 = 24. Taking this equation from every game in the season, we minimized the square error for each referee to get the number of calls that each referee makes.
             </li>
-        <li>As you can see from the results of this graph and the previous one, referees Kevin Cutler and Leroy Richardson have wide discrepancies between the number of calls they give for
-            the home team and the number of calls they give the visiting team.</li>
-    </ul>
+            <li>As you can see from the results of this graph and the previous one, referees Kevin Cutler and Leroy Richardson have wide discrepancies between the number of calls they give for
+                the home team and the number of calls they give the visiting team.</li>
+        </ul>
     </div>
     
     <br>
@@ -55,6 +73,7 @@
     <br>
     <br>
     <br>
+    
     
     <img src="../img/wtf-atlantic.png" style="height:750px;width:1000px; display:block; margin: 0 auto;"/>
     <br>
