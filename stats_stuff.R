@@ -40,12 +40,24 @@ colnames(fouls) <- c('Referee', 'Average.Home', 'Average.Away', 'Individual.Home
 average_fouls <- fouls[,1:3]
 average_fouls <- melt(average_fouls)
 
-average_foul_plot <- ggplot(data = average_fouls,aes(x=reorder(Referee, -value), y=value, fill=variable)) +
-  geom_col(width=0.6, position = position_dodge(width = 0.7))+
-  scale_fill_manual(breaks = c("Home", "Away"), values = c("grey50", "tomato3"))+
-  labs(x="Referee", y="Fouls Called", title="Average Foul Calls Per Referee", fill="Team")+
+
+home_color <- "black"
+away_color <- "red"
+
+average_foul_plot <- ggplot(data = average_fouls,aes(x=reorder(Referee, -value), y=value, color=variable)) +
+  geom_point()+
+  scale_color_manual(breaks = c("Home", "Away"), values = c(home_color, away_color))+
+  labs(x="Referee", y="Fouls Called", title="Average Foul Calls While Referee Active", color="Team")+
   theme(axis.text.x = element_text(angle=90))
+
+average_foul_plot <- average_foul_plot +
+  annotate("segment", y=averages[1], yend=averages[1],x=, color=home_color) #home average
+  #geom_hline(yintercept = averages[2], color=away_color) #away average
+
 average_foul_plot
+
+
+
 
 
 png("img/AverageFouls.png", width=1000, height=400)
