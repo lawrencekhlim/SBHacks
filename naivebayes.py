@@ -1,4 +1,4 @@
-data = [line.split(',') for line in open("Referees.csv").read().split('\n')]
+data = [line.split(',') for line in open("referees2015-2.csv").read().split('\n')]
 heads = data[0]
 data = data[1:-1]
 
@@ -17,15 +17,15 @@ prefnb = [0]*78
 for i in range(len(data)):
     line = data[i]
     #print(i)
-    if line[-1] == "FALSE":
+    if line[-1] == "0":
         nnb+=1
-    elif line[-1] == "TRUE":
+    elif line[-1] == "1":
         nb+=1
     for ref in range(len(prefb)):
-        if line[ref+1] == "TRUE":
-            if line[-1] == "FALSE":
+        if line[ref+1] == "1":
+            if line[-1] == "0":
                 prefnb[ref]+=1
-            elif line[-1] == "TRUE":
+            elif line[-1] == "1":
                 prefb[ref]+=1
 print(nb,nnb)
 for i in range(len(prefb)):
@@ -62,7 +62,7 @@ nip = 0
 
     
 for line in data:
-    if str(prhomeltaway([0 if ref == "FALSE" else 1 for ref in line[1:len(prefb)+1]])>=.5).upper() == line[-1]:
+    if ("1" if prhomeltaway([int(ref) for ref in line[1:len(prefb)+1]])>=.5 else "0") == (line[-1]):
         ncp+=1
     else:
         nip+=1
