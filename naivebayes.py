@@ -61,9 +61,9 @@ ncp = 0
 # num incorrect predictions
 nip = 0
 predbias =0
-minp = 0.01
-maxp = 0.99
-while maxp-minp>.001:
+minp = 0.0000000001
+maxp = 0.9999999999
+while maxp-minp>.00000000001:
     ncp = 0
     nip = 0
     predbias =0
