@@ -5,38 +5,6 @@ from scipy import linalg
 import csv
 import copy
 
-teams = {
-"Hawks": 0,
-"Celtics": 0,
-"Nets": 0,
-"Hornets": 0,
-"Bulls": 0,
-"Cavaliers": 0,
-"Mavericks": 0,
-"Nuggets": 0,
-"Pistons": 0,
-"Warriors": 0,
-"Rockets": 0,
-"Pacers": 0,
-"Clippers": 0,
-"Lakers": 0,
-"Grizzlies": 0,
-"Heat": 0,
-"Bucks": 0,
-"Timberwolves": 0,
-"Pelicans": 0,
-"Knicks": 0,
-"Thunder": 0,
-"Magic": 0,
-"76ers": 0,
-"Suns": 0,
-"Trail Blazers": 0,
-"Kings": 0,
-"Spurs": 0,
-"Raptors": 0,
-"Jazz": 0,
-"Wizards": 0
-}
 #key = officalnum, value = dict with key being team name and val being number of techs
 officialtechs = {}
 
@@ -65,17 +33,26 @@ for i in range (1, 668):
 
     for official in officials:
         if official not in officialtechs:
-            officialtechs[official] = copy.deepcopy(teams)
-        officialtechs[official][hometeamname] += hometechfouls
-        officialtechs[official][awayteamname] += awaytechfouls
+            officialtechs[official] = {}
+            officialtechs[official][hometeamname] = hometechfouls
+        else:
+            if hometeamname not in officialtechs[official]:
+                officialtechs[official][hometeamname] = hometechfouls
+            else:
+                officialtechs[official][hometeamname] += hometechfouls
+
+        if official not in officialtechs:
+            officialtechs[official] = {}
+            officialtechs[official][awayteamname] = awaytechfouls
+        else:
+            if awayteamname not in officialtechs[official]:
+                officialtechs[official][awayteamname] = awaytechfouls
+            else:
+                officialtechs[official][awayteamname] += awaytechfouls
 
 f = open("techfouls2017.csv", "w")
 for officialnum in sorted(officialtechs.keys(), key = lambda x: x):
-    line = ""
-    line += str(officialnum) + ","
     for team in sorted(officialtechs[officialnum], key = lambda x: x):
-        line += str(officialtechs[officialnum][team]) + ","
-
-    f.write(line[:-1] + "\n")
+        f.write(str(officialnum) + "," + str(officialtechs[officialnum][team]) + "," + str(team) + "\n")
 f.close()
 
