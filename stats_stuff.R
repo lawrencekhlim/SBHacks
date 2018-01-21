@@ -276,3 +276,6 @@ colnames(wtf)<-c("Ref","TF","Games.Refd","Weighted.TF","Teams")
 lapply(l, function(div){
   ggplot(wtf[wtf$Teams %in% div,], aes(x=reorder(Ref,-Weighted.TF),y=Weighted.TF,fill=Teams)) +  geom_col()+theme(axis.text.x = element_text(angle=90))+labs(x="Referees",y="average technical fouls",title=paste("Average Number of Technical Fouls assesed by each referee to the ",div[1]," Division",sep=""))
 })
+
+tfr <- read_csv("techfoulratios.csv",col_names = TRUE)
+ggplot(tfr,aes(x=reorder(Team,got.cucked),y=got.cucked,fill=Team))+geom_col()+theme(axis.text.x = element_text(angle=90))+labs(x="Team",y="Num referees assessed techs/games > .3",title=paste("# of games in which a referee's (technical foul/games officiated) for a team ratio is above 0.3, divided by the number of games officiated",sep=""))
