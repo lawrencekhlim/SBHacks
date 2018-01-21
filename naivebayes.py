@@ -10,7 +10,7 @@ nb=0
 # num not bias
 nnb=0
 #P(ref[i]=1|bias)
-skip = 7
+skip = 3
 prefb = [0]*(len(heads)-(4+skip))
 #P(ref[i]=1|not bias)
 prefnb = [0]*(len(prefb))
