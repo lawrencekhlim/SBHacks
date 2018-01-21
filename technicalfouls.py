@@ -3,40 +3,46 @@ import scipy
 import numpy as np
 from scipy import linalg
 import csv
+import copy
 
-officialtohomefouls = {}
-officialtoawayfouls = {}
-
-homesum = 0
-awaysum = 0
-
-matrixA = []
-vectorB = []
-vectorC = []
-
-def updateOfficialsFouls(officials):
-    for official in officials:
-        if official in officialtohomefouls:
-            officialtohomefouls[official].append (homefouls)
-        else:
-            officialtohomefouls[official] = [homefouls]
-        
-        if official in officialtoawayfouls:
-            officialtoawayfouls[official].append (awayfouls)
-        else:
-            officialtoawayfouls[official] = [awayfouls]
-
-def getHomeFoulAverage():
-    return (float) (homesum)/666
-
-def getAwayFoulAverage():
-    return (float) (awaysum)/666
-
+teams = {
+"Hawks": 0,
+"Celtics": 0,
+"Nets": 0,
+"Hornets": 0,
+"Bulls": 0,
+"Cavaliers": 0,
+"Mavericks": 0,
+"Nuggets": 0,
+"Pistons": 0,
+"Warriors": 0,
+"Rockets": 0,
+"Pacers": 0,
+"Clippers": 0,
+"Lakers": 0,
+"Grizzlies": 0,
+"Heat": 0,
+"Bucks": 0,
+"Timberwolves": 0,
+"Pelicans": 0,
+"Knicks": 0,
+"Thunder": 0,
+"Magic": 0,
+"76ers": 0,
+"Suns": 0,
+"Trail Blazers": 0,
+"Kings": 0,
+"Spurs": 0,
+"Raptors": 0,
+"Jazz": 0,
+"Wizards": 0
+}
+#key = officalnum, value = dict with key being team name and val being number of techs
+officialtechs = {}
 
 for i in range (1, 668):
-    
-    path = "data/game{:03d}.json".format(i)
-    print path
+    path = "data/Yr17game{:03d}.json".format(i)
+    print(path)
     json_file = open(path, "r")
     json_text = json_file.read()
     json_file.close()
@@ -48,81 +54,28 @@ for i in range (1, 668):
     
     officials = []
     for i in range (0, 3):
-        officials.append(int(json_dict[u'g'][u'offs'][u'off'][i][u'num']))
+        try:
+            officials.append(int(json_dict[u'g'][u'offs'][u'off'][i][u'num']))
+        except:
+            pass
+    hometechfouls = int(json_dict[u'g'][u'hls'][u'tstsg'][u'tf'])
+    hometeamname = str(json_dict[u'g'][u'hls'][u'tn'])
+    awaytechfouls = int(json_dict[u'g'][u'vls'][u'tstsg'][u'tf'])
+    awayteamname = json_dict[u'g'][u'vls'][u'tn']
 
-    homefouls = int(json_dict[u'g'][u'hls'][u'tstsg'][u'pf'])
-    homesum += homefouls
+    for official in officials:
+        if official not in officialtechs:
+            officialtechs[official] = copy.deepcopy(teams)
+        officialtechs[official][hometeamname] += hometechfouls
+        officialtechs[official][awayteamname] += awaytechfouls
 
-awayfouls = int(json_dict[u'g'][u'vls'][u'tstsg'][u'pf'])
-awaysum += awayfouls
-    
-    # for the matrix
-    row = [0] * 78
-    for i in range (0, 3):
-        row[officials[i]] = 1
-    matrixA.append(row)
-    vectorB.append([homefouls])
-    vectorC.append([awayfouls])
+f = open("techfouls2017.csv", "w")
+for officialnum in sorted(officialtechs.keys(), key = lambda x: x):
+    line = ""
+    line += str(officialnum) + ","
+    for team in sorted(officialtechs[officialnum], key = lambda x: x):
+        line += str(officialtechs[officialnum][team]) + ","
 
-#update the dicts with the referees' fouls for the game
-updateOfficialsFouls(officials)
-
-# Find average of fouls for home and array
-averagehome = getHomeFoulAverage()
-averageaway = getAwayFoulAverage()
-
-averagenumhomefouls = {}
-averagenumawayfouls = {}
-variancehomefouls = {}
-varianceawayfouls = {}
-averagebias = {}
-
-# Calculate each ref's average fouls they call at home
-for key, value in officialtohomefouls.items():
-    averagenumhomefouls[key] = (float)(sum(value))/len(value)
-    averagebias [key] = -1 * averagenumhomefouls[key]
-    variancehomefouls [key] = 0
-    for foul in officialtohomefouls[key]:
-        variancehomefouls[key]+= (averagenumhomefouls[key] - foul)**2
-    variancehomefouls[key] /= len (officialtohomefouls[key])
-
-# Calculate each ref's average fouls they call away
-for key, value in officialtoawayfouls.items():
-    averagenumawayfouls[key] = (float)(sum(value))/len(value)
-    averagebias [key] +=averagenumawayfouls[key]
-    varianceawayfouls [key] = 0
-    for foul in officialtoawayfouls[key]:
-        varianceawayfouls[key]+= (averagenumawayfouls[key] - foul)**2
-    varianceawayfouls[key] /= len (officialtoawayfouls[key])
-
-
-print "AWAY TEAM"
-print averagenumawayfouls
-print max (averagenumawayfouls.values())
-print "HOME TEAM"
-print averagenumhomefouls
-print max (averagenumhomefouls.values())
-
-
-
-print averageaway
-print averagehome
-
-
-print "BIAS"
-print sorted(averagebias, key= lambda x: averagebias[x])
-
-print variancehomefouls
-
-
-vectorX = linalg.lstsq(matrixA,vectorB)
-
-print vectorX
-f = open ("Referees.csv", "w")
-csvwriter = csv.writer (f)
-csvwriter.writerow([i for i in range(78)] + ["Home Team Fouls", "Away Team Fouls"])
-for i in range (len (matrixA)):
-    csvwriter.writerow (matrixA[i]+ [vectorB[i][0], vectorC[i][0]])
-#f.write ("," + str ()
-
+    f.write(line[:-1] + "\n")
+f.close()
 
