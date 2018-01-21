@@ -1,31 +1,31 @@
-Team,got.cucked,total.num.games
-76ers,29,70
-Bucks,47,70
-Bulls,30,70
-Cavaliers,27,70
-Celtics,37,70
-Clippers,50,70
-Grizzlies,47,69
-Hawks,38,72
-Heat,46,72
-Hornets,47,70
-Jazz,22,71
-Kings,42,69
-Knicks,53,69
-Lakers,32,69
-Magic,44,70
-Mavericks,47,68
-Nets,33,69
-Nuggets,29,71
-Pacers,37,72
-Pelicans,37,69
-Pistons,38,70
-Raptors,43,67
-Rockets,50,68
-Spurs,18,67
-Suns,57,72
-Thunder,57,70
-Timberwolves,33,71
-Trail Blazers,35,70
-Warriors,52,67
-Wizards,48,70
+Team,Num referees assessed techs/games > .3,total num games,color
+76ers,29,70,white
+Bucks,47,70,pine green
+Bulls,30,70,red
+Cavaliers,27,70,mahogany
+Celtics,37,70,green
+Clippers,50,70,red/blue
+Grizzlies,47,69,navy blue
+Hawks,38,72,red/white
+Heat,46,72,dark red
+Hornets,47,70,blue/purple
+Jazz,22,71,blue/green
+Kings,42,69,purple
+Knicks,53,69,orange/blue
+Lakers,32,69,yellow/purple
+Magic,44,70,sky blue
+Mavericks,47,68,blue/white
+Nets,33,69,black/white
+Nuggets,29,71,light blue/yellow
+Pacers,37,72,yellow/navy blue
+Pelicans,37,69,navy blue/gold
+Pistons,38,70,blue/red
+Raptors,43,67,red/black
+Rockets,50,68,red
+Spurs,18,67,gray
+Suns,57,72,orange
+Thunder,57,70,orange/blue
+Timberwolves,33,71,dark blue/white
+Trail Blazers,35,70,red/white
+Warriors,52,67,blue/gold
+Wizards,48,70,navy blue/red
