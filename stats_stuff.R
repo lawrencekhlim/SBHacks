@@ -1,19 +1,51 @@
 
-make_linear_model <- function(){
-  referees <- read.csv("Referees.csv")
-  referees[,1:78] <- lapply(referees[, 1:78], function(x) as.logical(x))
+create_data <- function(file_path){
+  referees <- read.csv(file_path)
+  referees[,1:108] <- lapply(referees[, 1:108], function(x) as.logical(x))
   referees$Total.Fouls <- referees$Home.Team.Fouls + referees$Away.Team.Fouls
+  referees$Bias <- referees$Home.Team.Fouls < referees$Away.Team.Fouls
+  
+  return(referees)
+}
+
+
+make_linear_model <- function(data){
+  if(missing(data)){
+    referees <- create_data('Referees2015.csv')
+  }
+  else{
+    referees <- data
+  }
   
   
-  xnam <- paste("`X",1:77,"`", sep="")
+  xnam <- paste("`" , colnames(referees[,1:108]), "`", sep="")
   formula_str <- paste(lapply(xnam, function(x) paste(x,xnam, sep="*", collapse="+")), collapse = "+")
-  plzwrk <- as.formula(paste("`Home.Team.Fouls` ~", formula_str))
-  plzwrk
+  plzwrk <- as.formula(paste("`Total.Fouls` ~", formula_str))
   
   linear_mod <- lm(data=referees,formula=plzwrk)
   return(linear_mod)
 }
-summary(make_linear_model())
+
+#ref2015 <- create_data('Referees2015.csv')
+#ref2015$isTrain <- runif(nrow(ref2015)) < 0.75
+
+#train <- ref2015[ref2015$isTrain,]
+#test <- ref2015[!ref2015$isTrain,]
+
+lm = make_linear_model()
+ref2016 <- create_data('Referees2016.csv')
+#ref2017 <- create_data('Referees.csv')
+
+
+predictions <- predict(lm, ref2016)
+residuals <- ref2016$Total.Fouls - predictions
+mean(residuals)
+
+summary(predictions)
+
+
+
+mean(abs(referees$Total.Fouls - mean(referees$Total.Fouls)))
 
 
 
