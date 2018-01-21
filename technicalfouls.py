@@ -5,6 +5,81 @@ from scipy import linalg
 import csv
 import copy
 
+<<<<<<< HEAD
+officialsNames = {
+    3:"Nick Buchert",
+    4:"Sean Wright",
+    5:"Kane Fitzgerald",
+    6:"Tony Brown",
+    7:"Lauren Holtkamp",
+    8:"Marc Davis",
+    9: "Derrick Stafford",
+    10: "Ron Garretson",
+    11:"Derrick Collins",
+    12:"CJ Washington",
+    13:"Monty McCutchen",
+    14:"Ed Malloy",
+    15:"Zach Zarba",
+    16:"David Guthrie",
+    17:"Jonathan Sterling",
+    18:"Matt Boland",
+    19:"James Capers",
+    20:"Leroy Richardson",
+    21:"Dedric Taylor",
+    22:"Bill Spooner",
+    23:"Jason Phillips",
+    24:"Mike Callahan",
+    25:"Tony Brothers",
+    26:"Pat Fraher",
+    27:"Mitchell Ervin",
+    28:"Kevin Scott",
+    29:"Mark Lindsay",
+    30:"John Goble",
+    31:"Scott Wall",
+    32:"Marat Kogut",
+    33:"Sean Corbin",
+    34:"Kevin Cutler",
+    35:"Jason Goldenberg",
+    36:"Brent Barnaky",
+    37:"Eric Dalen",
+    38:"Michael Smith",
+    39:"Tyler Ford",
+    40:"Leon Wood",
+    41:"Ken Mauer",
+    42:"Eric Lewis",
+    44:"Brett Nansel",
+    45:"Brian Forte",
+    46:"Ben Taylor",
+    47:"Bennie Adams",
+    48:"Scott Foster",
+    49:"Tom Washington",
+    50:"Gediminas Petraitis",
+    51:"Aaron Smith",
+    52:"Scott Twardoski",
+    54:"Ray Acosta",
+    55:"Bill Kennedy",
+    56:"Mark Ayotte",
+    58:"Josh Tiven",
+    59:"Gary Zielinski",
+    60:"James Williams",
+    61:"Courtney Kirkland",
+    62:"JB DeRosa",
+    63:"Derek Richardson",
+    64:"Justin Van Duyne",
+    66:"Haywoode Workman",
+    68:"Jacyn Goble",
+    71:"Rodney Mott",
+    72:"J.T. Orr",
+    73:"Tre Maddox",
+    74:"Curtis Blair",
+    77:"Karl Lane",
+    43:"Matt Myers",
+    53:"Randy Richardson",
+    67:"Brandon Adair",
+    70:"Phenizee Ransom",
+    76:"Vladimir Voyard-Tadal",
+}
+
 teams = {
 "Hawks": 0,
 "Celtics": 0,
@@ -37,6 +112,8 @@ teams = {
 "Jazz": 0,
 "Wizards": 0
 }
+=======
+>>>>>>> 2f5042dec5ba4c7e35658500aa2a84949e46e7cc
 #key = officalnum, value = dict with key being team name and val being number of techs
 officialtechs = {}
 
@@ -65,17 +142,26 @@ for i in range (1, 668):
 
     for official in officials:
         if official not in officialtechs:
-            officialtechs[official] = copy.deepcopy(teams)
-        officialtechs[official][hometeamname] += hometechfouls
-        officialtechs[official][awayteamname] += awaytechfouls
+            officialtechs[official] = {}
+            officialtechs[official][hometeamname] = hometechfouls
+        else:
+            if hometeamname not in officialtechs[official]:
+                officialtechs[official][hometeamname] = hometechfouls
+            else:
+                officialtechs[official][hometeamname] += hometechfouls
+
+        if official not in officialtechs:
+            officialtechs[official] = {}
+            officialtechs[official][awayteamname] = awaytechfouls
+        else:
+            if awayteamname not in officialtechs[official]:
+                officialtechs[official][awayteamname] = awaytechfouls
+            else:
+                officialtechs[official][awayteamname] += awaytechfouls
 
 f = open("techfouls2017.csv", "w")
 for officialnum in sorted(officialtechs.keys(), key = lambda x: x):
-    line = ""
-    line += str(officialnum) + ","
     for team in sorted(officialtechs[officialnum], key = lambda x: x):
-        line += str(officialtechs[officialnum][team]) + ","
-
-    f.write(line[:-1] + "\n")
+        f.write(str(officialnum) + "," + str(officialtechs[officialnum][team]) + "," + str(team) + "\n")
 f.close()
 

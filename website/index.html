@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html>
-    <body background="bball.jpg"style="background-position: center;"/>
-      <p style="font-size:60px; text-align:center;">Hacking Monopoly!</p>
+    <body background="bball.png"/>
+      <p style="font-size:60px; text-align:center;">Hacking NBA Referees!</p>
     <br>
     
     <div align="center" style="font-size:30px; width:1000px;  margin: 0 auto">Introduction:
-        The NBA 2017-2018 season is already about half over, and one of the most noticeable differences this
-        season from previous ones is the divide and criticism of the officiating jobs done by the referees.
+        Halfway through the NBA 2017-2018 season, one of the most noticeable differences of this season from previous ones is the growing divide among players and referees, and especially criticism of the officiating jobs done by the referees.
         </p>
     
     <div align="center" style="font-size:30px; width:1000px;  margin: 0 auto">What we did:
-                Analyzed the value of properties in Monopoly by simulating a game.
-                We took 1,000,000 turns and found out which spaces were landed on
-                the most, which ones raked in the most money, etc. Our results
-                are visualized below.
+                Interested in home court advantage, we looked into foul calls made by each referee
+                in every game of the season. After scraping the data off stats.nba.com, we graphed
+                the number of calls made when the referee is on the court, as well as ...
+                
+                For each NBA game, there are three referees on the court. Each one surveys only a specific part of the floor, but if one referee believes
+                an instance of contact warrants a foul, they will make their own individual decision to call it a foul.
     </p>
 
-    <img src="MostOftenLandedBetter.png" style="height:500px;width:1000px; display:block; margin: 0 auto;"/>
+    <img src="../img/AverageFouls.png" style="height:500px;width:1000px; display:block; margin: 0 auto;"/>
     <br>
     <div align="center" style="font-size:25px; width:1000px;  margin: 0 auto">
     Notable Trends/Observations:
         <ul style="list-style-type:disc; font-size:20px; text-align:center; margin: 0 auto">
-            <li>Jail is by far the most common square to land on because there are Chance and Community Chest cards, the "Go to Jail" square, and rolling three doubles in a row puts you in Jail.</li>
-            <li>All the properties 1-2 rolls after the Jail Cell are very popular. Illinois Ave. is the most popular property. The properties after "Go to Jail" are uncommon to land on because the players can jump past that section of the board due to Chance and Community Chest Cards and "Go to Jail".</li>
-            <li>Some of the most uncommonly landed on properties in the game are Mediterranean Ave., Baltic Ave., and Park Place.</li>
-            <li>There are certain properties that may seem like "peaks" or outliers (ex: St. Charles Place, Illinois Ave., Boardwalk, Railroads and Utilities).  The reason for that is because there are Chance and Community Chest cards that can advance you to these locations.  This is our main rationale for wanting to implement these cards and not ignore them.</li>
+            <li>On average, home teams (listed in orange) get called for -temp- of fouls, while away teams (listed in gray) get called for more fouls, at -temp-.</li>
+            <li>For a majority of the referees, home teams get an advantage because they are called for fewer fouls than the visiting team.</li>
+            <li>However, this does not account for the fact that referees work in group of threes, so a referee working with another referee who makes many calls will also increase their foul calls in this chart.</li>
         </ul>
     </div>
     
