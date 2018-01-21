@@ -270,3 +270,9 @@ lapply(l, function(div){
   #png(paste("img/techfouls-",div[1],".png",sep=""), width=1000, height=400)
   ggplot(techfouls[techfouls$Teams %in% div,], aes(x=Ref,y=TF,fill=Teams)) +  geom_col()+theme(axis.text.x = element_text(angle=90))+labs(x="Referees",y="technical fouls",title=div[1])
   })
+wtf <- read_csv("techfouls2015-7.csv",col_names = FALSE)
+colnames(wtf)<-c("Ref","TF","Games.Refd","Weighted.TF","Teams")
+
+lapply(l, function(div){
+  ggplot(wtf[wtf$Teams %in% div,], aes(x=reorder(Ref,-Weighted.TF),y=Weighted.TF,fill=Teams)) +  geom_col()+theme(axis.text.x = element_text(angle=90))+labs(x="Referees",y="average technical fouls",title=div[1])
+})

@@ -59,12 +59,26 @@ def prhomeltaway(x):
 ncp = 0
 # num incorrect predictions
 nip = 0
-
-    
-for line in data:
-    if ("1" if prhomeltaway([int(ref) for ref in line[1:len(prefb)+1]])>=.5 else "0") == (line[-1]):
-        ncp+=1
+predbias =0
+minp = 0.01
+maxp = 0.99
+while maxp-minp>.001:
+    ncp = 0
+    nip = 0
+    predbias =0
+    tipping_pt = (maxp+minp)/2
+    for line in data:
+        if(prhomeltaway([int(ref) for ref in line[1:len(prefb)+1]])>=tipping_pt):
+            predbias+=1
+            
+        if ("1" if prhomeltaway([int(ref) for ref in line[1:len(prefb)+1]])>=tipping_pt else "0") == (line[-1]):
+            ncp+=1
+        else:
+            nip+=1
+    if predbias < nb:
+        maxp = tipping_pt
     else:
-        nip+=1
-print(ncp,nip)
+        minp = tipping_pt
+print("tipping pt:",(maxp+minp)/2)
+print(ncp,nip,ncp/(ncp+nip),predbias/(ncp+nip))
     

@@ -2,9 +2,8 @@ import json
 import scipy
 import numpy as np
 from scipy import linalg
-import matplotlib
 import csv
-
+from random import random
 
 teamnameID = {
     "Hawks": 0,
@@ -16,7 +15,7 @@ teamnameID = {
     "Mavericks": 6,
     "Nuggets": 7,
     "Pistons": 8,
-    "Warriors": 29,
+    "Warriors": 9,
     "Rockets": 10,
     "Pacers": 11,
     "Clippers": 12,
@@ -36,7 +35,7 @@ teamnameID = {
     "Kings": 26,
     "Spurs": 27,
     "Raptors": 28,
-    "Wizards": 9
+    "Wizards": 29
 }
 
 officialsNames = {
@@ -148,7 +147,7 @@ vectorTotal = []
 
 for i in range (1, 668):
 
-    path = "data/Yr15game{:03d}.json".format(i)
+    path = "data/Yr17game{:03d}.json".format(i)
     # path
     json_file = open(path, "r")
     json_text = json_file.read()
@@ -172,13 +171,14 @@ for i in range (1, 668):
     awayfouls = int(json_dict[u'g'][u'vls'][u'tstsg'][u'pf'])
     awaysum += awayfouls
 
-    teams = [0] * 30
+    teams1 = [0] * 30
+    teams2 = [0] * 30
     hometeam = str(json_dict[u'g'][u'hls'][u'tn'])
     awayteam = str(json_dict[u'g'][u'vls'][u'tn'])
-    teams[teamnameID[hometeam]] = 1
-    teams[teamnameID[awayteam]] = 1
+    teams1[teamnameID[hometeam]] = 1
+    teams2[teamnameID[awayteam]] = 1
 
-    matrixD.append (teams)
+    matrixD.append (teams1+teams2)
 
 
     # for the matrix
@@ -186,7 +186,7 @@ for i in range (1, 668):
     for off in officials:
         row[int (off)] = 1
     
-    matrixTotal.append (row + teams)
+    matrixTotal.append (row + teams1+teams2)
     matrixA.append(row)
     vectorTotal.append ([homefouls + awayfouls])
     vectorB.append([homefouls])
@@ -224,50 +224,47 @@ for key, value in officialtoawayfouls.items():
     varianceawayfouls[key] /= len (officialtoawayfouls[key])
 
 
-print "AWAY TEAM"
-print averagenumawayfouls
-print max (averagenumawayfouls.values())
-print "HOME TEAM"
-print averagenumhomefouls
-print max (averagenumhomefouls.values())
-
-
-
-print averageaway
-print averagehome
-
 
 print "BIAS"
 print sorted(averagebias, key= lambda x: averagebias[x])
 
 print variancehomefouls
 
-print matrixA
 vectorX = linalg.lstsq(matrixA,vectorB)
-
-print vectorX
-
 vectorY = linalg.lstsq(matrixA, vectorC)
+
+
 f = open ("normalizedHomeFouls.csv", "w")
 csvwriter = csv.writer (f)
-csvwriter.writerow(["Official Names", "Linearized Home Fouls Given", "Linearized Away Fouls Given", "Home Fouls - Away Fouls"])
+csvwriter.writerow(["Official Names", "Average Number of Home Fouls","Average Number of Away Fouls",  "Linearized Home Fouls Given", "Linearized Away Fouls Given", "Linearized Home Fouls - Away Fouls"])
+
+csvwriter.writerow(["Average", averagehome, averageaway, averagehome/3, averageaway/3, (averagehome-averageaway)/3])
 for i in range (len (vectorX[0])):
     if i in officialsNames and vectorX[0][i][0] > 0.5:
-        csvwriter.writerow ([officialsNames[i],vectorX[0][i][0], vectorY[0][i][0], vectorX[0][i][0]-vectorY[0][i][0]])
+        csvwriter.writerow ([officialsNames[i],averagenumhomefouls[i], averagenumawayfouls[i],vectorX[0][i][0], vectorY[0][i][0], vectorX[0][i][0]-vectorY[0][i][0]])
 f.close()
 
 
-arr = [i for i in range(78)] +[key for key in sorted(teamnameID, key= lambda x: teamnameID[x])]
-for i in range (len (vectorX[0])):
-     (str(arr[i]) + ": " + str(vectorX [0][i][0]) )
 
-f = open ("Referees.csv", "w")
-csvwriter = csv.writer (f)
+#vectorComplete = linalg.lstsq (matrixTotal, vectorTotal)
+#print vectorComplete
+arr = [i for i in range(78)] +[key+" Home Team" for key in sorted(teamnameID, key= lambda x: teamnameID[x])] + [key+" Visiting Team" for key in sorted(teamnameID, key= lambda x: teamnameID[x])]
+#for i in range (len (vectorComplete[0])):
+#     print str(arr[i]) + ": " + str(vectorComplete [0][i][0])
 
+f2 = open ("Referees-Training.csv", "w")
+csvwriter = csv.writer (f2)
+
+f3 = open ("Referees-Validation.csv", "w")
+csvwriter2 = csv.writer (f3)
 
 csvwriter.writerow(arr + ["Home Team Fouls", "Away Team Fouls", "Total Team Fouls"])
+csvwriter2.writerow(arr + ["Home Team Fouls", "Away Team Fouls", "Total Team Fouls"])
 for i in range (len (matrixTotal)):
-    csvwriter.writerow (matrixTotal[i] + [vectorB[i][0], vectorC[i][0], vectorTotal[i][0]])
-f.close()
-#f.write ("," + str ()
+    if random () <= 0.75:
+        csvwriter.writerow (matrixTotal[i] + [vectorB[i][0], vectorC[i][0], vectorTotal[i][0],"1" if vectorC[i][0]-vectorB[i][0] >= 5 else "0"])
+    else:
+        csvwriter2.writerow (matrixTotal[i] + [vectorB[i][0], vectorC[i][0], vectorTotal[i][0],"1" if vectorC[i][0]-vectorB[i][0] >= 5 else "0"])
+f2.close()
+f3.close()
 
