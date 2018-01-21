@@ -209,3 +209,23 @@ summary(lm(bias$`ay Adjusted Foul`~bias$`Years Experience`))
 modfs <- lm(players$Points~players$FTA+players$Seconds_Played)
 summary(modfs)
 anova(modfs)
+
+library(readr)
+techfouls2015 <- read_csv("techfouls2015.csv", col_names = FALSE, col_types = cols(X1 = col_factor(levels = c("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77"))))
+atlantic <- c('Celtics','Raptors','76ers','Knicks','Nets')
+central <- c('Cavaliers','Pacers','Bucks','Pistons','Bulls')
+southeast <- c('Heat','Wizards','Hornets','Hawks','Magic')
+northwest <- c('Timberwolves','Thunder','Trail Blazers','Nuggets','Jazz')
+pacific <- c('Warriors','Clippers','Suns','Lakers','Kings')
+southwest <- c('Rockets','Spurs','Pelicans','Grizzlies','Mavericks')
+
+
+techfouls2015 <- techfouls2015[order(techfouls2015$X2,techfouls2015$X1),]
+View(techfouls2015)
+ggplot(techfouls2015[techfouls2015$X3 %in% atlantic,], aes(x=X1,y=X2,fill=reorder(X3, -X2))) +  geom_col()
+ggplot(techfouls2015[techfouls2015$X3 %in% central,], aes(x=X1,y=X2,fill=reorder(X3, -X2))) +  geom_col()
+ggplot(techfouls2015[techfouls2015$X3 %in% southeast,], aes(x=X1,y=X2,fill=reorder(X3, -X2))) +  geom_col()
+ggplot(techfouls2015[techfouls2015$X3 %in% northwest,], aes(x=X1,y=X2,fill=reorder(X3, -X2))) +  geom_col()
+ggplot(techfouls2015[techfouls2015$X3 %in% pacific,], aes(x=X1,y=X2,fill=reorder(X3, -X2))) +  geom_col()
+ggplot(techfouls2015[techfouls2015$X3 %in% southwest,], aes(x=X1,y=X2,fill=reorder(X3, -X2))) +  geom_col()
+
